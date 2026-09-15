@@ -1,0 +1,110 @@
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ReferenceLine,
+  Tooltip,
+  Cell,
+  ResponsiveContainer,
+} from "recharts";
+import { useNavigate } from "react-router-dom";
+import { categoryStyle } from "../../lib/constants";
+
+const QUADRANTS = [
+  { pos: "top-4 left-10", label: "Low risk · high impact" },
+  { pos: "top-4 right-3 text-right", label: "High risk · high impact" },
+  { pos: "bottom-28 left-10", label: "Low risk · low impact" },
+  { pos: "bottom-28 right-3 text-right", label: "High risk · low impact" },
+];
+
+// One point per asset: x = predicted failure risk, y = grid impact.
+// Color = priority category. Reference lines at the 50 thresholds highlight
+// the insight that failure likelihood and grid consequence are independent
+// dimensions (e.g. high risk / moderate impact vs low risk / high impact).
+export default function RiskImpactScatter({ assets, withQuadrants }) {
+  const navigate = useNavigate();
+  const data = (assets || []).map((a) => ({
+    ...a,
+    x: Number(a.failure_risk) || 0,
+    y: Number(a.grid_impact) || 0,
+    fill: categoryStyle(a.priority_category).hex,
+  }));
+
+  return (
+    <div className="relative h-[340px] w-full">
+      {withQuadrants &&
+        QUADRANTS.map((q) => (
+          <span
+            key={q.label}
+            className={`pointer-events-none absolute z-10 ${q.pos} text-[9px] font-semibold uppercase tracking-[0.14em] text-app-label`}
+          >
+            {q.label}
+          </span>
+        ))}
+      <ResponsiveContainer width="100%" height="100%">
+        <ScatterChart margin={{ top: 8, right: 12, bottom: 4, left: -16 }}>
+          <CartesianGrid stroke="#1c2832" strokeDasharray="3 3" />
+          <XAxis
+            type="number"
+            dataKey="x"
+            name="Failure risk"
+            domain={[0, 100]}
+            tick={{ fill: "#647482", fontSize: 11 }}
+            stroke="#26343f"
+            label={{
+              value: "Failure risk (% model-estimated) →",
+              position: "insideBottomRight",
+              offset: -4,
+              fill: "#647482",
+              fontSize: 11,
+            }}
+          />
+          <YAxis
+            type="number"
+            dataKey="y"
+            name="Grid impact"
+            domain={[0, 100]}
+            tick={{ fill: "#647482", fontSize: 11 }}
+            stroke="#26343f"
+            label={{
+              value: "Grid impact of failure",
+              angle: -90,
+              position: "insideLeft",
+              fill: "#647482",
+              fontSize: 11,
+            }}
+          />
+          <ReferenceLine x={50} stroke="#2e3d49" strokeDasharray="4 4" />
+          <ReferenceLine y={50} stroke="#2e3d49" strokeDasharray="4 4" />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3", stroke: "#4f84c3" }}
+            content={({ payload }) => {
+              const p = payload && payload[0] && payload[0].payload;
+              if (!p) return <span />;
+              return (
+                <div className="rounded-sm border border-app-border bg-app-raised px-3 py-2 text-xs">
+                  <p className="font-semibold text-app-text">{p.asset_id}</p>
+                  <p className="mt-0.5 text-app-muted">
+                    Risk {Number(p.failure_risk).toFixed(1)}% · Impact{" "}
+                    {Number(p.grid_impact).toFixed(1)} · {p.priority_category}
+                  </p>
+                </div>
+              );
+            }}
+          />
+          <Scatter
+            data={data}
+            onClick={(dot) => dot && dot.asset_id && navigate(`/assets/${dot.asset_id}`)}
+            className="cursor-pointer"
+          >
+            {data.map((point) => (
+              <Cell key={point.asset_id} fill={point.fill} fillOpacity={0.75} />
+            ))}
+          </Scatter>
+        </ScatterChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}

@@ -9,51 +9,70 @@
 # =============================================================================
 
 team:
-  name: ""                             # REQUIRED — e.g., "Orion Squad"
-  track: ""                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
+  name: "VoltVision"                     # REQUIRED
+  track: "AI"                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
   lead:
-    name: ""                           # REQUIRED — e.g., "Alice Chen"
-    email: ""                          # REQUIRED — e.g., "alice.chen@ibm.com"
+    name: "Aum Vaja"                     # REQUIRED
+    email: "26dce115@charusat.edu.in"    # REQUIRED
   members:
-    - name: ""                         # REQUIRED — Team member 1
+    - name: "Vrunda Kotadiya"
       email: ""
-    - name: ""                         # Add more members by copying the two lines above
+    - name: "Tarang Prajapati"
       email: ""
-    - name: ""
+    - name: "Riza Bhatt"
       email: ""
 
 submission:
-  title: ""                            # REQUIRED — Project display name, e.g., "SmartOps Dashboard"
+  title: "GridGuardian AI"               # REQUIRED
 
-  problem_statement: >                 # REQUIRED — 1-3 sentences. What problem? Who has it?
-    Replace this text with a concise description of the real-world problem
-    your project addresses and who experiences it.
+  problem_statement: >                 # REQUIRED
+    Electricity utilities manage thousands of critical assets such as transformers,
+    feeders, breakers, and capacitors, making it difficult to identify which assets
+    require attention before they fail. A high probability of failure does not
+    necessarily mean an asset has the highest operational consequence, so maintenance
+    decisions based only on failure prediction can be misleading. Grid operators need
+    to understand not only what might fail, but also what could happen if it fails and
+    what should be handled first.
 
-  solution_summary: >                  # REQUIRED — 1-3 sentences. What did you build?
-    Replace this text with a clear description of your solution
-    and how it addresses the problem above.
+  solution_summary: >                 # REQUIRED
+    GridGuardian AI is a decision-support system for electric-grid operators that
+    chains four honest systems: an ML (Gradient Boosting) model predicts per-asset
+    failure probability, a deterministic graph cascade simulates what-if failure
+    scenarios, a transparent scoring formula prioritizes maintenance, and a
+    generative-AI layer narrates the structured results into a human-readable
+    operations brief without ever inventing a number. The React + FastAPI application
+    surfaces all of this in an enterprise operations console.
 
-  key_features:                        # REQUIRED — List 3 to 5 specific features you implemented
-    - ""                               # e.g., "Real-time pipeline anomaly detection using watsonx.ai"
-    - ""
-    - ""
-    - ""                               # optional 4th
-    - ""                               # optional 5th
+  key_features:                        # REQUIRED — 3 to 5 features
+    - "Predictive failure risk from a Gradient Boosting ML model (risk scoring per asset)"
+    - "What-If failure simulation with a deterministic graph cascade over the grid network"
+    - "Maintenance priority engine combining failure risk, grid impact, criticality, and urgency"
+    - "AI Operations Brief that narrates backend-computed metrics without recalculating them"
+    - "Enterprise operations dashboard (overview, assets, priority, alerts, simulation, model)"
 
   tech_stack:
-    languages: []                      # REQUIRED — e.g., ["Python", "TypeScript"]
-    frameworks: []                     # e.g., ["FastAPI", "React"]
-    ibm_technologies: []               # e.g., ["watsonx.ai", "IBM Bob", "IBM Cloud Functions"]
-    databases: []                      # e.g., ["PostgreSQL", "Redis"]
-    other: []                          # e.g., ["Docker", "GitHub Actions", "Slack API"]
+    languages: ["Python", "JavaScript"]
+    frameworks: ["FastAPI", "React", "Vite", "Tailwind CSS"]
+    ibm_technologies: ["IBM BoB AI Innovation Hackathon platform"]
+    databases: []
+    other: ["scikit-learn", "NetworkX", "Gradient Boosting", "pytest", "GitHub Actions", "REST API"]
 
-  what_we_are_most_proud_of: >         # Optional but recommended — guides judges to your best work
-    Replace with what aspect of the submission you consider strongest
-    and want judges to pay special attention to.
+  what_we_are_most_proud_of: >        # Optional but recommended
+    GridGuardian AI goes beyond simply predicting which grid asset might fail. It
+    combines failure prediction with independent grid-impact analysis, what-if failure
+    simulation, and transparent maintenance prioritization, then wraps the results in
+    an AI-generated operations brief that is strictly prevented from calculating or
+    inventing the underlying metrics. The key insight is that failure risk is not the
+    same as operational impact, and the whole pipeline (training, scoring,
+    prioritization, simulation) is backed by 105 passing tests.
 
-  known_limitations: >                 # Optional but recommended — be honest about gaps
-    Replace with any known limitations, incomplete features,
-    or shortcuts taken due to time constraints.
+  known_limitations: >                # Optional but recommended
+    The current prototype uses deterministic synthetic utility data rather than live
+    utility data. The network failure simulation is a simplified graph-based model and
+    is not a production electrical power-flow solver or digital twin. The
+    machine-learning model has not been validated against real-world utility datasets.
+    Production deployment would require secure integration with authorized utility data
+    sources and additional operational validation.
 
 # =============================================================================
 # ARTIFACT LOCATIONS

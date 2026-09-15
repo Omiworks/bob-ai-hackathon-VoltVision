@@ -1,0 +1,189 @@
+# GridGuardian AI — Final Project Report
+
+**IBM BoB AI Innovation Hackathon 2026 · Final Build (Phase 6)**
+
+> ⚠️ **Synthetic demonstration project.** All data is machine-generated with a fixed
+> seed (42). The "simulation" is a graph-based cascade model, not an electrical
+> power-flow solver. Nothing on these pages represents a real utility, real customers,
+> or real equipment — and the product says so, visibly, on every screen.
+
+---
+
+## A. Project name
+
+**GridGuardian AI — Predict. Simulate. Prioritize. Respond.**
+
+## B. Problem statement
+
+Grid operators are drowning in sensor data but starved of decisions. Predictive
+maintenance ML already tells operators *which assets might fail*. The hard operational
+question is the next step: **"given limited crews, what do we do about it, right now?"**
+Deciding by failure probability alone is dangerous — a low-risk transformer can sit in
+front of a hospital district, while a high-risk one may feed almost nothing. GridGuardian
+treats *consequence* as the deciding factor, not just *probability*.
+
+## C. Solution overview
+
+1. **Predict.** A Gradient Boosting classifier (trained on ~800 synthetic assets, seed 42)
+   estimates each asset's 30-day failure probability. Percentile thresholds turn that
+   probability into a 0–100 risk score and a LOW / MEDIUM / HIGH / CRITICAL category.
+2. **Simulate.** A deterministic NetworkX cascade over `network.json` answers the What-If
+   question: *"if this asset fails, what breaks next?"* It traces reachable zones and
+   facilities, finds stressed neighbor assets, estimates affected customers, and returns a
+   transparent 0–100 severity score — fully **independent** of the ML failure probability.
+3. **Prioritize.** A transparent formula blends failure risk × grid impact × operational
+   urgency into one 0–100 maintenance-priority score per asset. A greedy allocator then
+   answers *"with N crews, who gets dispatched first?"*
+4. **Explain.** An LLM narrates a plain-English **AI Operations Brief**. It receives only
+   the structured numbers the three systems above already computed and is explicitly
+   forbidden from inventing or recalculating any of them. Without an API key the product
+   degrades gracefully — every numeric page works, and the brief page explains exactly
+   what to configure.
+
+## D. System design
+
+```
+data/ ──> ml/predict + services/impact + services/priority ──> precomputed CSVs
+        (800 assets, seed 42)                                     │
+                                              services/registry.py (cached adapter)
+                                                                  ▼
+                                          FastAPI (thin routers, no logic)
+      ┌───────────────────────────────────────────────────────────────┤
+React/Vite UI ── /api proxy ──> /api/assets · /api/assets/{id} · /api/simulation ·
+                                 /api/simulation/compare · /api/simulation/demo ·
+                                 /api/priority/ranking · /api/priority/allocate ·
+                                 /api/dashboard/summary · /api/alerts ·
+                                 /api/ai/brief · /api/health
+```
+
+- **Backend:** FastAPI + pandas + scikit-learn + networkx. Routers validate input and map
+  errors (400 / 404 / 422 / 500, never leaking tracebacks); **all business logic lives in
+  tested service modules** (`app/ml`, `app/services/*`).
+- **Frontend:** React 18 + Vite + Tailwind CSS + Recharts. Dark, operator-room visual
+  language. 8 pages: Command Overview, Asset Analysis, Asset Detail, What-If Simulation,
+  Maintenance Priority, Alerts, AI Operations Brief, Model & Data.
+- **LLM layer:** `app/services/ai_brief.py` — optional, key-gated, hard system-prompt
+  guardrails, single callable seam that is unit-tested.
+- Screenshots are reproduced in `docs/screenshots/` (see section J).
+
+## E. The four-number product story
+
+Two assets tell the whole story on the Overview page, side by side:
+
+| Metric | TX-104 | TX-233 |
+|---|---|---|
+| Predicted failure risk | **98.32% (HIGH)** | **0.52% (LOW)** |
+| Grid impact if failed | 70.97 | 82.98 |
+| Maintenance priority | **71.29 (HIGH)** | **0.44 (LOW)** |
+| Simulated severity if failed | HIGH (58.62) | HIGH (66.97) |
+| Customers if failed | ~3,060 | ~5,377 |
+| Critical facilities downstream | HOSP-1 | HOSP-4 (ZONE-7/8) |
+
+**The lesson is deliberate:** *HIGH FAILURE RISK ≠ HIGH CONSEQUENCE.* TX-104 is the most
+likely asset to fail, yet losing it costs far less than losing TX-233 — a healthy
+transformer whose failure would cascade across a hospital district. Risk-only thinking
+parks the crew at TX-104; risk × consequence puts the biggest loss-prevention win at
+TX-233. Priority merges both signals, and the What-If screen shows the simulated cascade
+that justifies it. These two heroes are discovered by the data (the simulation demo
+picker selects them from rules, never from hardcoded IDs).
+
+## F. Data
+
+- **Source:** fully synthetic, generated by `backend/data/generate_data.py` with seed 42
+  (deterministic end-to-end). ~800 assets across 5 types (transformer, feeder,
+  capacitor bank, breaker, recloser), with deliberate documented correlations
+  (age→temperature, maintenance gap→vibration, etc.).
+- **Labels are never fabricated:** the raw dataset contains **no** `failure_risk`,
+  `grid_impact`, or `priority_score` — those are genuinely computed by the Phase 2/3 code.
+- **Artifacts:** `assets.csv` → `assets_scored.csv` (Phase 2) → `assets_prioritized.csv`
+  (Phase 3), plus `network.json`, `alerts.csv`, `simulation_examples.json`, and
+  `ml/model.pkl`, `metrics.json`, `feature_importances.json`.
+
+## G. AI & LLM responsibility
+
+- The classifier outputs a **probability**, never a certainty; the UI labels it
+  "model-estimated" everywhere.
+- The What-If result is labeled a **simulation**, and every result carries the same
+  assumptions list (single asset fails, no cascading protection failures, static loads,
+  etc.).
+- The LLM brief is a **narration layer only**: it receives structured facts from the
+  backend (never raw CSV), its system prompt forbids inventing/recalculating numbers,
+  and the UI renders a "facts used" table next to the brief so every figure is
+  verifiable against the numeric pages. Provider output is not the source of truth —
+  the backend numbers are.
+- Determinism: seed 42 everywhere; same input in ⇒ same output out.
+
+## H. Security & ethics
+
+- API keys live only in `.env` (`*.env` is git-ignored; `.env.example` is committed).
+- The API **never returns tracebacks** to clients and normalizes internal errors to a
+  fixed contract (400/404/422/500 with a human `detail`).
+- Synthetic data is flagged in every curl-able surface: API root, health, dashboard
+  summary, page footers, and the report.
+- No scraping, no private data, no third-party network calls at runtime except the
+  optional, user-configured Anthropic endpoint used purely for the brief.
+
+## I. Testing & validation
+
+**102/102 tests pass** across four suites (stdlib runner and pytest compatible):
+
+| Suite | Path | Count |
+|---|---|---|
+| Prediction (Phase 2) | `backend/app/ml/test_predict.py` | 13 |
+| Impact / priority / explanations (Phase 3) | `backend/app/services/test_phase3.py` | 28 |
+| Simulation (Phase 4) | `backend/app/services/test_simulation.py` | 22 |
+| API (Phase 5/6: assets, simulation, compare, demo, ranking, allocate, alerts, AI brief) | `backend/app/api/test_api.py` | 39 |
+
+Highlights enforced by tests: no hardcoded asset IDs in scoring/simulation logic;
+deterministic rankings with stable tie-breaks; severity scores bounded and category-valid;
+the exact error contract (400 vs 404 vs 422); the AI brief's graceful 503 when no key is
+configured; and the endpoint's success path through a mocked provider. The frontend
+additionally goes through a production build (`vite build`) and was verified live against
+a running backend through the Vite dev proxy.
+
+Run them:
+
+```bash
+cd backend/app/ml        && python -m pytest test_predict.py -q
+cd backend/app/services  && python -m pytest test_phase3.py test_simulation.py -q
+cd backend/app/api       && python -m pytest test_api.py -q
+cd frontend              && npm run build      # production build must succeed
+```
+
+## J. Run instructions & screenshots
+
+```bash
+# backend (terminal 1)
+cd backend && pip install -r requirements.txt && python -m uvicorn app.main:app --reload
+#                              Swagger: http://127.0.0.1:8000/docs
+
+# frontend (terminal 2)
+cd frontend && npm install && npm run dev      # http://localhost:5173
+```
+
+Screenshots are embedded here and also live in `docs/screenshots/`:
+
+| Screenshot | File | What it shows |
+|---|---|---|
+| 1 | `s1-overview.png` | Command Overview — KPIs, risk-vs-consequence quadrants, TX-104 vs TX-233 story |
+| 2 | `s2-priority.png` | Maintenance Priority — ranked list + crew allocation |
+| 3 | `s3-asset-TX-104.png` | Asset Detail — four-number cards + consequence timeline + cascade diagram |
+| 4 | `s4-simulate-single-TX-104.png` | What-If single failure — severity, timeline, cascade, follow-up |
+| 5 | `s5-simulate-compare-four.png` | What-If comparison — TX-104 vs TX-233 vs CAP-109 vs CAP-126 |
+| 6 | `s6-brief.png` | AI Operations Brief — selection, guardrail notes, graceful no-key state |
+
+## K. Future work
+
+- Fit the pipeline to real feeder/transformer data and an engineering-grade power-flow
+  solver; add load-transfer optimization on top of the cascade results.
+- Explainable-AI depth (SHAP on top of the rule factors), and priority feedback learning
+  from maintenance outcomes.
+- CI/CD with Playwright end-to-end tests driving the live stack, and a deployment target
+  (Docker compose + reverse proxy) for the demo.
+- Crew scheduling as a proper OR problem (capacity, travel time, shift windows) while
+  keeping the transparent greedy fallback.
+
+---
+
+*GridGuardian AI is a hackathon prototype. Synthetic data only. No warranty; not for
+real-world operational use.*

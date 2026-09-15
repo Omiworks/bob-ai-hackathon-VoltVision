@@ -5,6 +5,8 @@
 
 # ── Secrets & Environment ─────────────────────────────────────────────────────
 .env
+.env.*
+!.env.example
 .env.local
 .env.production
 *.key
@@ -81,6 +83,11 @@ demo/*.mp4
 demo/*.mov
 demo/*.avi
 demo/*.mkv
+
+# ── ML artifacts (GridGuardian — regenerable) ────────────────────────────────
+src/backend/app/ml/*.pkl
+src/backend/app/ml/*.joblib
+src/backend/app/ml/*.pyc
 
 # ── Docker volumes / local data ───────────────────────────────────────────────
 data/

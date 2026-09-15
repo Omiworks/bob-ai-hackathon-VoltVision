@@ -1,7 +1,5 @@
 # 🚀 GridGuardian AI
 
-> ⚠️ **Replace everything in `[ ]` brackets with your actual content before submission.**
-
 ---
 
 ## 👥 Team
@@ -17,8 +15,6 @@
 
 ## 🎯 Problem Statement
 
-> In 2–3 sentences: What problem does your project solve? Who experiences this problem?
-
 Electricity utilities manage thousands of critical assets such as transformers, feeders, breakers, and capacitors, making it difficult to identify which assets require attention before they fail. More importantly, a high probability of failure does not necessarily mean that an asset has the highest operational consequence, so maintenance decisions based only on failure prediction can be misleading.
 
 Grid operators need a way to understand not only **what might fail**, but also **what could happen if it fails and what should be handled first**.
@@ -26,8 +22,6 @@ Grid operators need a way to understand not only **what might fail**, but also *
 ---
 
 ## 💡 Solution
-
-> In 2–3 sentences: What did you build? How does it solve the problem above?
 
 **GridGuardian AI** is a decision-support system for electricity utilities that combines machine learning, grid-impact analysis, failure simulation, maintenance prioritization, and generative AI explanations.
 
@@ -52,6 +46,7 @@ Our core idea is:
 - **AI Operations Brief:** Uses generative AI to turn structured predictions, impact results, and simulation outcomes into concise operational explanations without allowing the AI to calculate or invent the underlying metrics.
 
 - **Operations Dashboard:** Provides a centralized interface for monitoring asset health, risk, impact, priority, alerts, simulations, and model information.
+
 ---
 
 ## 🛠️ Tech Stack
@@ -75,22 +70,27 @@ Our core idea is:
 ## 📁 Repository Structure
 
 ```text
-├── backend/              # FastAPI backend, ML, simulation, and APIs
-│   ├── app/
-│   │   ├── api/          # REST API endpoints
-│   │   ├── ml/           # Machine learning model and prediction
-│   │   ├── models/       # Data models
-│   │   ├── services/     # Impact, priority, AI, and business logic
-│   │   └── simulation/   # Grid failure simulation
-│   ├── data/             # Synthetic utility dataset and generated outputs
-│   └── requirements.txt
-├── frontend/             # React + Vite frontend application
-│   ├── src/
-│   │   ├── components/   # Reusable UI components
-│   │   ├── pages/        # Application pages
-│   │   └── services/     # Frontend API services
-│   └── package.json
+├── src/                  # All application source code
+│   ├── backend/          # FastAPI backend, ML, simulation, and APIs
+│   │   ├── app/
+│   │   │   ├── api/      # REST API endpoints
+│   │   │   ├── ml/       # Machine learning model and prediction
+│   │   │   ├── models/   # Data models
+│   │   │   ├── services/ # Impact, priority, AI, and business logic
+│   │   │   └── simulation/ # Grid failure simulation
+│   │   ├── data/         # Synthetic utility dataset and generated outputs
+│   │   └── requirements.txt
+│   └── frontend/         # React + Vite frontend application
+│       ├── src/
+│       │   ├── components/ # Reusable UI components
+│       │   ├── pages/      # Application pages
+│       │   └── services/   # Frontend API services
+│       └── package.json
 ├── docs/                 # Project documentation
+│   ├── problem-statement.md
+│   ├── solution-overview.md
+│   ├── architecture.md
+│   ├── setup-guide.md
 │   ├── PHASE2_REPORT.md
 │   ├── PHASE3_REPORT.md
 │   ├── PHASE4_REPORT.md
@@ -98,10 +98,11 @@ Our core idea is:
 │   ├── FINAL_PROJECT_REPORT.md
 │   ├── DEMO_SCRIPT.md
 │   └── PITCH.md
-├── screenshots/          # Application screenshots
-├── presentation/         # Presentation and pitch materials
+├── demo/screenshots/     # Application screenshots
+├── presentation/         # Presentation and pitch materials (slides.pptx, slides.pdf)
 ├── README.md
 └── .gitignore
+```
 
 ---
 
@@ -113,7 +114,7 @@ git clone https://github.com/Omiworks/bob-ai-hackathon-VoltVision.git
 cd bob-ai-hackathon-VoltVision
 
 # 2. Install backend dependencies
-cd backend
+cd src/backend
 pip install -r requirements.txt
 
 # 3. Start the backend
@@ -123,11 +124,12 @@ python -m uvicorn app.main:app --reload
 # API documentation: http://127.0.0.1:8000/docs
 
 # 4. Open a SECOND terminal and start the frontend
-cd bob-ai-hackathon-VoltVision/frontend
+cd bob-ai-hackathon-VoltVision/src/frontend
 npm install
 npm run dev
 
 # 5. Open the local URL shown by Vite in your browser
+```
 
 ## 🖥️ Demo
 
@@ -141,8 +143,6 @@ npm run dev
 ---
 
 ## ⚠️ Known Limitations
-
-> Be honest — judges appreciate transparency over overclaiming.
 
 - The current prototype uses deterministic synthetic utility data rather than live utility data.
 - The network failure simulation is a simplified graph-based model and is not a production electrical power-flow solver or digital twin.

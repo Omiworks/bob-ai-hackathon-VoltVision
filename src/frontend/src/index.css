@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root surfaces are dark and inherently full-height so there is never a
+   white or light strip around the application. */
+html {
+  background-color: #0B1117;
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #0B1117;
+  color: #E6EDF3;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: #0B1117;
+}
+
+::selection {
+  background-color: rgba(77, 140, 203, 0.35);
+}
+
+/* Numeric values, asset IDs and timestamps render tabular by default. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Compact monospace for technical identifiers. */
+.mono {
+  font-family: "Cascadia Mono", "Consolas", ui-monospace, monospace;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1117;
+}
+::-webkit-scrollbar-thumb {
+  background: #2E3D49;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3A4A58;
+}
+
+/* Thin, quiet focus ring that still works on dark panels. */
+:focus-visible {
+  outline: 2px solid #54708f;
+  outline-offset: 1px;
+}
+
+/* Dark select/option popups so open dropdowns match the theme. */
+select option {
+  background-color: #151E26;
+  color: #E6EDF3;
+}
+
+/* Recharts labels/tooltips stay legible on dark panels. */
+.recharts-cartesian-axis-tick-value {
+  fill: #657482;
+}
+.recharts-cartesian-axis-line,
+.recharts-cartesian-axis-tick-line {
+  stroke: #27333D;
+}

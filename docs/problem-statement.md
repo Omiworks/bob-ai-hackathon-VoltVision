@@ -2,20 +2,50 @@
 
 ## Background
 
-[Describe the broader context. What domain or industry does this problem belong to? What situation creates the problem?]
+Electric utilities operate thousands of critical assets — transformers, feeders,
+breakers, and capacitors — spread across wide geographical grids. They monitor these
+assets with a flood of sensor, condition, and maintenance data, but turning that data
+into an operational decision is the hard part.
+
+The classic approach (championed by predictive-maintenance systems) is to answer
+*"which asset is most likely to fail?"* A high failure probability, however, does not
+necessarily mean an asset has the highest operational consequence. A low-risk
+transformer that feeds a substation with a hospital and hundreds of customers may
+matter far more than a high-risk capacitor serving a small, non-critical load.
 
 ## The Problem
 
-[State the problem clearly and specifically. Avoid vague statements like "things are slow" — instead say "Operations teams spend an average of 45 minutes per incident diagnosing pipeline failures because logs are scattered across 6 different tools."]
+Grid operators are drowning in sensor data but starved of decisions. The hard question
+isn't *"can we predict a failure?"* — it's **"given limited crews and limited time,
+what do we do about it, right now?"**
+
+Decision-making is hard because the answer depends on three separate questions that are
+often conflated:
+
+1. **Predict** — how likely is this asset to fail?
+2. **Simulate** — if it *does* fail, what breaks and how many people/critical
+   facilities are affected?
+3. **Prioritize** — given crews and budget, which assets do we fix first?
 
 ## Who is Affected
 
-[Describe the specific user or persona experiencing this problem. Be concrete — not "developers" but "backend engineers managing CI/CD pipelines in enterprises with 50+ microservices."]
+Grid operators and distribution-utility maintenance planners. They are usually
+engineers responsible for hundreds to thousands of assets with limited crews, limited
+budgets, and no tool that combines failure risk, operational consequence, and
+maintenance priority in one place.
 
 ## Why It Matters
 
-[What is the cost of this problem? Lost time? Revenue? Safety risk? Frustration? Quantify if possible.]
+- Misallocated maintenance crews mean preventable outages at critical facilities
+  (hospitals, industrial plants, emergency services).
+- Outage response is reactive: crews are dispatched after a failure instead of before
+  it, increasing downtime and customer impact.
+- Maintenance decisions based only on failure risk can be actively misleading when a
+  lower-risk asset has a much higher operational consequence.
 
 ## Why Existing Solutions Fall Short
 
-[Briefly explain what people currently do and why it doesn't fully solve the problem. This sets up why your solution is needed.]
+Existing predictive-maintenance tools typically stop at failure prediction. They do not
+answer the consequence question ("what happens if it fails?"), nor do they turn the
+answer into a ranked, actionable maintenance plan. GridGuardian AI connects all three:
+**predict → simulate → prioritize**, and explains the result in an operations brief.
