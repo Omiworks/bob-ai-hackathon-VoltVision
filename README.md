@@ -133,7 +133,7 @@ npm run dev
 
 | Artifact | Location |
 |---|---|
-| 🖼️ Screenshots | [See screenshots/](screenshots/) |
+| 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
 | 📊 Presentation | [See presentation/](presentation/) |
 | 📚 Documentation | [See docs/](docs/) |
 | 🔌 API Documentation | `http://127.0.0.1:8000/docs` when running locally |
