@@ -107,25 +107,27 @@ Our core idea is:
 
 ## ⚡ How to Run
 
-> **Copy these exact steps from your [`docs/setup-guide.md`](docs/setup-guide.md)**
-
 ```bash
-# 1. Clone the repo
-git clone https://github.com/[your-repo].git
-cd [your-repo]
+# 1. Clone the repository
+git clone https://github.com/Omiworks/bob-ai-hackathon-VoltVision.git
+cd bob-ai-hackathon-VoltVision
 
-# 2. Install dependencies
-[your install command here]
+# 2. Install backend dependencies
+cd backend
+pip install -r requirements.txt
 
-# 3. Configure environment
-cp .env.example .env
-# Edit .env with your values
+# 3. Start the backend
+python -m uvicorn app.main:app --reload
 
-# 4. Run the project
-[your run command here]
-```
+# Backend API: http://127.0.0.1:8000
+# API documentation: http://127.0.0.1:8000/docs
 
----
+# 4. Open a SECOND terminal and start the frontend
+cd bob-ai-hackathon-VoltVision/frontend
+npm install
+npm run dev
+
+# 5. Open the local URL shown by Vite in your browser
 
 ## 🖥️ Demo
 
@@ -142,14 +144,19 @@ cp .env.example .env
 
 > Be honest — judges appreciate transparency over overclaiming.
 
-- [Limitation 1: e.g., "Authentication is mocked — not production-ready"]
-- [Limitation 2: e.g., "Only tested on Chrome"]
-- [Limitation 3: e.g., "Feature X is scaffolded but not fully implemented"]
+- The current prototype uses deterministic synthetic utility data rather than live utility data.
+- The network failure simulation is a simplified graph-based model and is not a production electrical power-flow solver or digital twin.
+- The machine-learning model has not yet been validated against real-world utility datasets.
+- Production deployment would require secure integration with authorized utility data sources and additional operational validation.
 
 ---
 
 ## 🏅 What We're Most Proud Of
 
-[Tell the judges what part of your submission is strongest and worth paying close attention to.]
+GridGuardian AI goes beyond simply predicting which grid asset might fail. It combines failure prediction with independent grid-impact analysis, what-if failure simulation, maintenance prioritization, and AI-generated operational explanations.
+
+Our key insight is that **failure risk is not the same as operational impact**. GridGuardian helps operators understand both dimensions and turn them into a practical maintenance decision.
+
+> **Don't just predict what might fail — help decide what to do about it.**
 
 ---
