@@ -74,19 +74,34 @@ Our core idea is:
 
 ## 📁 Repository Structure
 
-```
-├── src/                  # All source code
-├── docs/                 # Written documentation
-│   ├── problem-statement.md
-│   ├── solution-overview.md
-│   ├── architecture.md
-│   └── setup-guide.md
-├── demo/                 # Demo artifacts
-│   ├── screenshots/      # App screenshots
-│   └── demo-video-link.txt  # Link to demo video
-├── presentation/         # Slide deck
-└── submission.yaml       # Structured submission metadata
-```
+```text
+├── backend/              # FastAPI backend, ML, simulation, and APIs
+│   ├── app/
+│   │   ├── api/          # REST API endpoints
+│   │   ├── ml/           # Machine learning model and prediction
+│   │   ├── models/       # Data models
+│   │   ├── services/     # Impact, priority, AI, and business logic
+│   │   └── simulation/   # Grid failure simulation
+│   ├── data/             # Synthetic utility dataset and generated outputs
+│   └── requirements.txt
+├── frontend/             # React + Vite frontend application
+│   ├── src/
+│   │   ├── components/   # Reusable UI components
+│   │   ├── pages/        # Application pages
+│   │   └── services/     # Frontend API services
+│   └── package.json
+├── docs/                 # Project documentation
+│   ├── PHASE2_REPORT.md
+│   ├── PHASE3_REPORT.md
+│   ├── PHASE4_REPORT.md
+│   ├── PHASE5_REPORT.md
+│   ├── FINAL_PROJECT_REPORT.md
+│   ├── DEMO_SCRIPT.md
+│   └── PITCH.md
+├── screenshots/          # Application screenshots
+├── presentation/         # Presentation and pitch materials
+├── README.md
+└── .gitignore
 
 ---
 
