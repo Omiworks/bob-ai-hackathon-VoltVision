@@ -1,4 +1,4 @@
-https://youtu.be/your-demo-video-link-here
+No demo video provided. The project is demonstrated through the included screenshots, presentation, and runnable local application.
 
 Replace the URL above with a link to your demo video.
 
