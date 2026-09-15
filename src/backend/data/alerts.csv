@@ -1,0 +1,62 @@
+# Synthetic demonstration data — not real utility data.
+alert_id,asset_id,substation,severity,title,reason,recommended_action,timestamp
+ALERT-1010,RCL-171,Godhra Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-14 08:52:00
+ALERT-1040,TX-377,Vadodara Central Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-14 08:30:00
+ALERT-1059,CAP-164,Padra Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-14 08:10:00
+ALERT-1031,TX-142,Karjan Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-14 08:08:00
+ALERT-1046,FDR-150,Godhra Substation,High,High load,Load percentage exceeding recommended sustained threshold,Evaluate load redistribution to neighboring assets,2026-09-14 07:26:00
+ALERT-1012,TX-322,Bharuch Substation,High,Potential network overload,Neighboring asset failure risk may cascade to this unit,Monitor closely and prepare contingency crew,2026-09-14 00:01:00
+ALERT-1002,BRK-201,Baroda North Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-13 23:15:00
+ALERT-1029,TX-298,Padra Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-13 22:42:00
+ALERT-1024,FDR-321,Godhra Substation,Critical,Failure risk increased,Recent sensor readings indicate elevated failure risk,Prioritize for immediate inspection,2026-09-13 21:31:00
+ALERT-1018,FDR-250,Anand Substation,High,High load,Load percentage exceeding recommended sustained threshold,Evaluate load redistribution to neighboring assets,2026-09-13 19:23:00
+ALERT-1035,BRK-204,Baroda North Substation,High,Potential network overload,Neighboring asset failure risk may cascade to this unit,Monitor closely and prepare contingency crew,2026-09-13 19:04:00
+ALERT-1042,TX-322,Bharuch Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-13 17:38:00
+ALERT-1044,TX-249,Baroda South Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-13 14:25:00
+ALERT-1045,BRK-165,Padra Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-13 10:25:00
+ALERT-1008,TX-242,Vadodara Central Substation,High,High load,Load percentage exceeding recommended sustained threshold,Evaluate load redistribution to neighboring assets,2026-09-13 10:12:00
+ALERT-1023,TX-120,Baroda South Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-13 09:32:00
+ALERT-1048,FDR-150,Godhra Substation,Low,Maintenance overdue,Scheduled maintenance window has been exceeded,Schedule routine maintenance visit,2026-09-13 08:38:00
+ALERT-1041,TX-157,Baroda South Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-13 08:28:00
+ALERT-1021,TX-317,Karjan Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-13 06:37:00
+ALERT-1017,FDR-277,Padra Substation,Low,Maintenance overdue,Scheduled maintenance window has been exceeded,Schedule routine maintenance visit,2026-09-13 04:57:00
+ALERT-1000,FDR-172,Godhra Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-13 01:19:00
+ALERT-1033,RCL-127,Baroda South Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-12 23:58:00
+ALERT-1027,FDR-331,Bharuch Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-12 23:36:00
+ALERT-1050,FDR-291,Anand Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-12 22:55:00
+ALERT-1038,TX-360,Karjan Substation,Critical,Failure risk increased,Recent sensor readings indicate elevated failure risk,Prioritize for immediate inspection,2026-09-12 22:09:00
+ALERT-1030,TX-198,Padra Substation,Critical,Failure risk increased,Recent sensor readings indicate elevated failure risk,Prioritize for immediate inspection,2026-09-12 21:53:00
+ALERT-1011,FDR-321,Godhra Substation,High,High load,Load percentage exceeding recommended sustained threshold,Evaluate load redistribution to neighboring assets,2026-09-12 20:29:00
+ALERT-1016,FDR-217,Godhra Substation,Low,Maintenance overdue,Scheduled maintenance window has been exceeded,Schedule routine maintenance visit,2026-09-12 20:28:00
+ALERT-1056,FDR-250,Anand Substation,High,Potential network overload,Neighboring asset failure risk may cascade to this unit,Monitor closely and prepare contingency crew,2026-09-12 16:48:00
+ALERT-1047,TX-226,Baroda South Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-12 15:05:00
+ALERT-1003,FDR-134,Padra Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-12 14:47:00
+ALERT-1001,FDR-150,Godhra Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-12 12:42:00
+ALERT-1007,TX-294,Karjan Substation,High,Potential network overload,Neighboring asset failure risk may cascade to this unit,Monitor closely and prepare contingency crew,2026-09-12 12:39:00
+ALERT-1020,BRK-126,Karjan Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-12 12:18:00
+ALERT-1055,TX-182,Baroda South Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-12 12:18:00
+ALERT-1015,TX-217,Anand Substation,Low,Maintenance overdue,Scheduled maintenance window has been exceeded,Schedule routine maintenance visit,2026-09-12 11:33:00
+ALERT-1026,TX-100,Bharuch Substation,Critical,Failure risk increased,Recent sensor readings indicate elevated failure risk,Prioritize for immediate inspection,2026-09-12 10:35:00
+ALERT-1053,FDR-317,Baroda North Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-12 09:04:00
+ALERT-1025,FDR-150,Godhra Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-12 05:52:00
+ALERT-1006,FDR-217,Godhra Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-12 04:25:00
+ALERT-1004,FDR-148,Bharuch Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-12 04:22:00
+ALERT-1057,FDR-304,Anand Substation,High,Potential network overload,Neighboring asset failure risk may cascade to this unit,Monitor closely and prepare contingency crew,2026-09-12 00:01:00
+ALERT-1028,FDR-210,Bharuch Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-11 20:59:00
+ALERT-1039,TX-100,Bharuch Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-11 18:52:00
+ALERT-1022,FDR-331,Bharuch Substation,High,Potential network overload,Neighboring asset failure risk may cascade to this unit,Monitor closely and prepare contingency crew,2026-09-11 16:42:00
+ALERT-1034,BRK-141,Karjan Substation,Critical,Failure risk increased,Recent sensor readings indicate elevated failure risk,Prioritize for immediate inspection,2026-09-11 15:32:00
+ALERT-1037,TX-157,Baroda South Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-11 11:22:00
+ALERT-1013,RCL-108,Nadiad Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-11 06:26:00
+ALERT-1049,FDR-179,Vadodara Central Substation,Low,Maintenance overdue,Scheduled maintenance window has been exceeded,Schedule routine maintenance visit,2026-09-11 04:41:00
+ALERT-1052,FDR-106,Karjan Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-11 03:09:00
+ALERT-1014,BRK-129,Baroda South Substation,Critical,Failure risk increased,Recent sensor readings indicate elevated failure risk,Prioritize for immediate inspection,2026-09-11 02:43:00
+ALERT-1036,CAP-132,Karjan Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-10 23:08:00
+ALERT-1032,FDR-282,Bharuch Substation,Low,Maintenance overdue,Scheduled maintenance window has been exceeded,Schedule routine maintenance visit,2026-09-10 22:34:00
+ALERT-1058,BRK-165,Padra Substation,Medium,Unexpected vibration increase,Vibration reading trending upward over recent cycles,Dispatch technician for vibration analysis,2026-09-10 22:27:00
+ALERT-1043,FDR-210,Bharuch Substation,High,Potential network overload,Neighboring asset failure risk may cascade to this unit,Monitor closely and prepare contingency crew,2026-09-10 20:50:00
+ALERT-1005,TX-298,Padra Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-10 20:49:00
+ALERT-1054,BRK-141,Karjan Substation,High,Critical temperature trend,Sustained temperature rise beyond safe operating band,Schedule thermal inspection within 48 hours,2026-09-10 14:53:00
+ALERT-1019,FDR-203,Godhra Substation,Critical,Failure risk increased,Recent sensor readings indicate elevated failure risk,Prioritize for immediate inspection,2026-09-10 11:39:00
+ALERT-1009,CAP-140,Halol Substation,Medium,Weather risk,Severe weather forecast increasing failure likelihood in area,Pre-position crew and materials ahead of forecast weather,2026-09-10 10:41:00
+ALERT-1051,FDR-291,Anand Substation,Critical,Failure risk increased,Recent sensor readings indicate elevated failure risk,Prioritize for immediate inspection,2026-09-10 08:25:00

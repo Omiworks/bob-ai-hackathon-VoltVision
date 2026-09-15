@@ -1,0 +1,47 @@
+[
+  {
+    "asset_id": "TX-104",
+    "asset_type": "transformer",
+    "failure_probability": 0.9832,
+    "failure_risk_percent": 98.32,
+    "risk_category": "HIGH",
+    "downstream_customers": 3060,
+    "critical_facilities": 3
+  },
+  {
+    "asset_id": "TX-233",
+    "asset_type": "transformer",
+    "failure_probability": 0.0052,
+    "failure_risk_percent": 0.52,
+    "risk_category": "LOW",
+    "downstream_customers": 5377,
+    "critical_facilities": 4
+  },
+  {
+    "asset_id": "FDR-100",
+    "asset_type": "feeder",
+    "failure_probability": 0.9944,
+    "failure_risk_percent": 99.44,
+    "risk_category": "CRITICAL",
+    "downstream_customers": 1095,
+    "critical_facilities": 0
+  },
+  {
+    "asset_id": "FDR-101",
+    "asset_type": "feeder",
+    "failure_probability": 0.6955,
+    "failure_risk_percent": 69.55,
+    "risk_category": "MEDIUM",
+    "downstream_customers": 898,
+    "critical_facilities": 0
+  },
+  {
+    "asset_id": "RCL-100",
+    "asset_type": "recloser",
+    "failure_probability": 0.0042,
+    "failure_risk_percent": 0.42,
+    "risk_category": "LOW",
+    "downstream_customers": 2141,
+    "critical_facilities": 3
+  }
+]

@@ -1,0 +1,381 @@
+{
+  "description": "Synthetic demonstration grid topology \u2014 not real utility data.",
+  "hero_transformers": [
+    "TX-104",
+    "TX-118",
+    "TX-142",
+    "TX-171",
+    "TX-205",
+    "TX-233"
+  ],
+  "nodes": [
+    {
+      "id": "SUB-A",
+      "type": "substation",
+      "label": "Vadodara Central Substation"
+    },
+    {
+      "id": "SUB-B",
+      "type": "substation",
+      "label": "Anand Substation"
+    },
+    {
+      "id": "TX-104",
+      "type": "transformer",
+      "label": "TX-104",
+      "substation": "Anand Substation"
+    },
+    {
+      "id": "TX-118",
+      "type": "transformer",
+      "label": "TX-118",
+      "substation": "Vadodara Central Substation"
+    },
+    {
+      "id": "TX-142",
+      "type": "transformer",
+      "label": "TX-142",
+      "substation": "Vadodara Central Substation"
+    },
+    {
+      "id": "TX-171",
+      "type": "transformer",
+      "label": "TX-171",
+      "substation": "Anand Substation"
+    },
+    {
+      "id": "TX-205",
+      "type": "transformer",
+      "label": "TX-205",
+      "substation": "Vadodara Central Substation"
+    },
+    {
+      "id": "TX-233",
+      "type": "transformer",
+      "label": "TX-233",
+      "substation": "Anand Substation"
+    },
+    {
+      "id": "ZONE-1",
+      "type": "zone",
+      "label": "Zone 1 - Anand East"
+    },
+    {
+      "id": "ZONE-2",
+      "type": "zone",
+      "label": "Zone 2 - Fatehgunj"
+    },
+    {
+      "id": "ZONE-3",
+      "type": "zone",
+      "label": "Zone 3 - Alkapuri"
+    },
+    {
+      "id": "ZONE-4",
+      "type": "zone",
+      "label": "Zone 4 - Sayajigunj"
+    },
+    {
+      "id": "ZONE-5",
+      "type": "zone",
+      "label": "Zone 5 - Karelibaug"
+    },
+    {
+      "id": "ZONE-6",
+      "type": "zone",
+      "label": "Zone 6 - Manjalpur"
+    },
+    {
+      "id": "ZONE-7",
+      "type": "zone",
+      "label": "Zone 7 - Gotri"
+    },
+    {
+      "id": "ZONE-8",
+      "type": "zone",
+      "label": "Zone 8 - Vasna"
+    },
+    {
+      "id": "HOSP-1",
+      "type": "hospital",
+      "label": "Anand City Hospital"
+    },
+    {
+      "id": "RES-1",
+      "type": "residential",
+      "label": "Anand East Residential Area"
+    },
+    {
+      "id": "RES-2",
+      "type": "residential",
+      "label": "Fatehgunj Residential Area"
+    },
+    {
+      "id": "IND-1",
+      "type": "industrial",
+      "label": "Fatehgunj Industrial Park"
+    },
+    {
+      "id": "HOSP-2",
+      "type": "hospital",
+      "label": "Alkapuri Multispecialty Hospital"
+    },
+    {
+      "id": "RES-3",
+      "type": "residential",
+      "label": "Alkapuri Residential Area"
+    },
+    {
+      "id": "IND-2",
+      "type": "industrial",
+      "label": "Sayajigunj Industrial Estate"
+    },
+    {
+      "id": "RES-4",
+      "type": "residential",
+      "label": "Karelibaug Residential Area"
+    },
+    {
+      "id": "HOSP-3",
+      "type": "hospital",
+      "label": "Karelibaug Community Hospital"
+    },
+    {
+      "id": "IND-3",
+      "type": "industrial",
+      "label": "Manjalpur Industrial Zone"
+    },
+    {
+      "id": "RES-5",
+      "type": "residential",
+      "label": "Manjalpur Residential Area"
+    },
+    {
+      "id": "HOSP-4",
+      "type": "hospital",
+      "label": "Gotri Referral Hospital"
+    },
+    {
+      "id": "RES-6",
+      "type": "residential",
+      "label": "Vasna Residential Area"
+    },
+    {
+      "id": "IND-4",
+      "type": "industrial",
+      "label": "Vasna Industrial Park"
+    },
+    {
+      "id": "FDR-1",
+      "type": "feeder",
+      "label": "Feeder 1"
+    },
+    {
+      "id": "FDR-2",
+      "type": "feeder",
+      "label": "Feeder 2"
+    },
+    {
+      "id": "FDR-3",
+      "type": "feeder",
+      "label": "Feeder 3"
+    },
+    {
+      "id": "FDR-4",
+      "type": "feeder",
+      "label": "Feeder 4"
+    }
+  ],
+  "edges": [
+    {
+      "source": "SUB-B",
+      "target": "TX-104",
+      "relation": "supplies"
+    },
+    {
+      "source": "SUB-A",
+      "target": "TX-118",
+      "relation": "supplies"
+    },
+    {
+      "source": "SUB-A",
+      "target": "TX-142",
+      "relation": "supplies"
+    },
+    {
+      "source": "SUB-B",
+      "target": "TX-171",
+      "relation": "supplies"
+    },
+    {
+      "source": "SUB-A",
+      "target": "TX-205",
+      "relation": "supplies"
+    },
+    {
+      "source": "SUB-B",
+      "target": "TX-233",
+      "relation": "supplies"
+    },
+    {
+      "source": "TX-104",
+      "target": "ZONE-1",
+      "relation": "feeds"
+    },
+    {
+      "source": "TX-118",
+      "target": "ZONE-2",
+      "relation": "feeds"
+    },
+    {
+      "source": "TX-142",
+      "target": "ZONE-3",
+      "relation": "feeds"
+    },
+    {
+      "source": "TX-142",
+      "target": "ZONE-4",
+      "relation": "feeds"
+    },
+    {
+      "source": "TX-171",
+      "target": "ZONE-5",
+      "relation": "feeds"
+    },
+    {
+      "source": "TX-205",
+      "target": "ZONE-6",
+      "relation": "feeds"
+    },
+    {
+      "source": "TX-233",
+      "target": "ZONE-7",
+      "relation": "feeds"
+    },
+    {
+      "source": "TX-233",
+      "target": "ZONE-8",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-1",
+      "target": "HOSP-1",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-1",
+      "target": "RES-1",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-2",
+      "target": "RES-2",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-2",
+      "target": "IND-1",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-3",
+      "target": "HOSP-2",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-3",
+      "target": "RES-3",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-4",
+      "target": "IND-2",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-5",
+      "target": "RES-4",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-5",
+      "target": "HOSP-3",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-6",
+      "target": "IND-3",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-6",
+      "target": "RES-5",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-7",
+      "target": "HOSP-4",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-8",
+      "target": "RES-6",
+      "relation": "feeds"
+    },
+    {
+      "source": "ZONE-8",
+      "target": "IND-4",
+      "relation": "feeds"
+    },
+    {
+      "source": "TX-104",
+      "target": "TX-171",
+      "relation": "connects"
+    },
+    {
+      "source": "TX-118",
+      "target": "TX-142",
+      "relation": "connects"
+    },
+    {
+      "source": "TX-142",
+      "target": "TX-205",
+      "relation": "connects"
+    },
+    {
+      "source": "TX-171",
+      "target": "TX-233",
+      "relation": "connects"
+    },
+    {
+      "source": "TX-205",
+      "target": "TX-118",
+      "relation": "connects"
+    },
+    {
+      "source": "TX-233",
+      "target": "TX-104",
+      "relation": "connects"
+    },
+    {
+      "source": "SUB-A",
+      "target": "FDR-1",
+      "relation": "supplies"
+    },
+    {
+      "source": "SUB-A",
+      "target": "FDR-2",
+      "relation": "supplies"
+    },
+    {
+      "source": "SUB-B",
+      "target": "FDR-3",
+      "relation": "supplies"
+    },
+    {
+      "source": "SUB-B",
+      "target": "FDR-4",
+      "relation": "supplies"
+    }
+  ]
+}

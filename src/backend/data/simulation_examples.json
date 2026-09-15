@@ -1,0 +1,303 @@
+{
+  "description": "Simulation examples — synthetic demonstration data only.",
+  "disclaimer": "Simplified graph-based failure-impact simulation over synthetic demonstration data. Not a power-flow solver, digital twin, or validated utility outage model.",
+  "auto_selected": {
+    "high_risk_high_impact": "CAP-109",
+    "low_risk_high_impact": "TX-233",
+    "high_risk_low_impact": "CAP-126"
+  },
+  "simulations": [
+    {
+      "failed_asset": "CAP-109",
+      "asset_type": "capacitor_bank",
+      "network_node_present": false,
+      "affected_zones": [],
+      "affected_facilities": [],
+      "critical_facilities_affected": 4,
+      "critical_facility_ids": [],
+      "facility_source": "asset_field",
+      "affected_assets": [],
+      "stressed_assets": [],
+      "estimated_customers_affected": 2705,
+      "severity": "HIGH",
+      "severity_score": 65.18,
+      "severity_factors": {
+        "customers_score": 87.94,
+        "facilities_score": 100,
+        "zones_score": 0.0,
+        "stressed_score": 0.0,
+        "depth_score": 0.0
+      },
+      "cascade_depth": 0,
+      "assumptions": [
+        "Simplified directed network model built from network.json",
+        "Downstream dependencies (zones and the facilities they feed) are treated as affected when their supplying asset fails",
+        "Customer impact is estimated from the failed asset's synthetic downstream_customer footprint (zone-level totals are not present in network.json)",
+        "Neighboring transformers and the supplying substation are treated as stressed if they may need to carry additional burden",
+        "No electrical power-flow calculation is performed"
+      ],
+      "explanation": {
+        "headline": "Failure of CAP-109 would affect ~2,705 customers, including 4 critical facility(ies).",
+        "key_drivers": [
+          "2,705 estimated customers affected",
+          "4 critical facility(ies) affected"
+        ],
+        "consequence_summary": "Significant consequence: substantial population or critical facilities affected.",
+        "recommended_follow_up": "Dispatch a crew promptly; monitor stressed neighboring assets for overload signs."
+      }
+    },
+    {
+      "failed_asset": "TX-233",
+      "asset_type": "transformer",
+      "network_node_present": true,
+      "affected_zones": [
+        "ZONE-7",
+        "ZONE-8"
+      ],
+      "affected_facilities": [
+        {
+          "id": "HOSP-4",
+          "name": "Gotri Referral Hospital",
+          "type": "hospital",
+          "criticality": "critical"
+        },
+        {
+          "id": "IND-4",
+          "name": "Vasna Industrial Park",
+          "type": "industrial",
+          "criticality": "high"
+        },
+        {
+          "id": "RES-6",
+          "name": "Vasna Residential Area",
+          "type": "residential",
+          "criticality": "low"
+        }
+      ],
+      "critical_facilities_affected": 1,
+      "critical_facility_ids": [
+        "HOSP-4"
+      ],
+      "facility_source": "graph",
+      "affected_assets": [],
+      "stressed_assets": [
+        {
+          "asset_id": "TX-171",
+          "node_type": "transformer",
+          "stress_score": 68.6,
+          "reason": "Direct neighbor that may carry additional burden if TX-233 fails"
+        },
+        {
+          "asset_id": "TX-104",
+          "node_type": "transformer",
+          "stress_score": 93.4,
+          "reason": "Direct neighbor that may carry additional burden if TX-233 fails"
+        },
+        {
+          "asset_id": "SUB-B",
+          "node_type": "substation",
+          "stress_score": 75.0,
+          "reason": "Direct neighbor that may carry additional burden if TX-233 fails"
+        }
+      ],
+      "estimated_customers_affected": 5377,
+      "severity": "HIGH",
+      "severity_score": 66.97,
+      "severity_factors": {
+        "customers_score": 95.58,
+        "facilities_score": 25.0,
+        "zones_score": 66.67,
+        "stressed_score": 79.0,
+        "depth_score": 66.67
+      },
+      "cascade_depth": 2,
+      "assumptions": [
+        "Simplified directed network model built from network.json",
+        "Downstream dependencies (zones and the facilities they feed) are treated as affected when their supplying asset fails",
+        "Customer impact is estimated from the failed asset's synthetic downstream_customer footprint (zone-level totals are not present in network.json)",
+        "Neighboring transformers and the supplying substation are treated as stressed if they may need to carry additional burden",
+        "No electrical power-flow calculation is performed"
+      ],
+      "explanation": {
+        "headline": "Failure of TX-233 would affect ~5,377 customers across 2 zone(s), including 1 critical facility(ies).",
+        "key_drivers": [
+          "5,377 estimated customers affected",
+          "2 downstream zone(s) affected",
+          "1 critical facility(ies) affected",
+          "3 neighboring asset(s) stressed"
+        ],
+        "consequence_summary": "Significant consequence: substantial population or critical facilities affected.",
+        "recommended_follow_up": "Dispatch a crew promptly; monitor stressed neighboring assets for overload signs."
+      }
+    },
+    {
+      "failed_asset": "CAP-126",
+      "asset_type": "capacitor_bank",
+      "network_node_present": false,
+      "affected_zones": [],
+      "affected_facilities": [],
+      "critical_facilities_affected": 0,
+      "critical_facility_ids": [],
+      "facility_source": "asset_field",
+      "affected_assets": [],
+      "stressed_assets": [],
+      "estimated_customers_affected": 160,
+      "severity": "LOW",
+      "severity_score": 22.62,
+      "severity_factors": {
+        "customers_score": 56.54,
+        "facilities_score": 0.0,
+        "zones_score": 0.0,
+        "stressed_score": 0.0,
+        "depth_score": 0.0
+      },
+      "cascade_depth": 0,
+      "assumptions": [
+        "Simplified directed network model built from network.json",
+        "Downstream dependencies (zones and the facilities they feed) are treated as affected when their supplying asset fails",
+        "Customer impact is estimated from the failed asset's synthetic downstream_customer footprint (zone-level totals are not present in network.json)",
+        "Neighboring transformers and the supplying substation are treated as stressed if they may need to carry additional burden",
+        "No electrical power-flow calculation is performed"
+      ],
+      "explanation": {
+        "headline": "Failure of CAP-126 would affect ~160 customers, with no critical facilities.",
+        "key_drivers": [
+          "160 estimated customers affected"
+        ],
+        "consequence_summary": "Limited consequence: small population and no critical infrastructure reachable.",
+        "recommended_follow_up": "No urgent action needed; continue routine maintenance cadence."
+      }
+    },
+    {
+      "failed_asset": "TX-104",
+      "asset_type": "transformer",
+      "network_node_present": true,
+      "affected_zones": [
+        "ZONE-1"
+      ],
+      "affected_facilities": [
+        {
+          "id": "HOSP-1",
+          "name": "Anand City Hospital",
+          "type": "hospital",
+          "criticality": "critical"
+        },
+        {
+          "id": "RES-1",
+          "name": "Anand East Residential Area",
+          "type": "residential",
+          "criticality": "low"
+        }
+      ],
+      "critical_facilities_affected": 1,
+      "critical_facility_ids": [
+        "HOSP-1"
+      ],
+      "facility_source": "graph",
+      "affected_assets": [],
+      "stressed_assets": [
+        {
+          "asset_id": "TX-171",
+          "node_type": "transformer",
+          "stress_score": 68.6,
+          "reason": "Direct neighbor that may carry additional burden if TX-104 fails"
+        },
+        {
+          "asset_id": "TX-233",
+          "node_type": "transformer",
+          "stress_score": 68.3,
+          "reason": "Direct neighbor that may carry additional burden if TX-104 fails"
+        },
+        {
+          "asset_id": "SUB-B",
+          "node_type": "substation",
+          "stress_score": 75.0,
+          "reason": "Direct neighbor that may carry additional burden if TX-104 fails"
+        }
+      ],
+      "estimated_customers_affected": 3060,
+      "severity": "HIGH",
+      "severity_score": 58.62,
+      "severity_factors": {
+        "customers_score": 89.31,
+        "facilities_score": 25.0,
+        "zones_score": 33.33,
+        "stressed_score": 70.63,
+        "depth_score": 66.67
+      },
+      "cascade_depth": 2,
+      "assumptions": [
+        "Simplified directed network model built from network.json",
+        "Downstream dependencies (zones and the facilities they feed) are treated as affected when their supplying asset fails",
+        "Customer impact is estimated from the failed asset's synthetic downstream_customer footprint (zone-level totals are not present in network.json)",
+        "Neighboring transformers and the supplying substation are treated as stressed if they may need to carry additional burden",
+        "No electrical power-flow calculation is performed"
+      ],
+      "explanation": {
+        "headline": "Failure of TX-104 would affect ~3,060 customers across 1 zone(s), including 1 critical facility(ies).",
+        "key_drivers": [
+          "3,060 estimated customers affected",
+          "1 downstream zone(s) affected",
+          "1 critical facility(ies) affected",
+          "3 neighboring asset(s) stressed"
+        ],
+        "consequence_summary": "Significant consequence: substantial population or critical facilities affected.",
+        "recommended_follow_up": "Dispatch a crew promptly; monitor stressed neighboring assets for overload signs."
+      }
+    }
+  ],
+  "comparison": {
+    "scenarios": [
+      {
+        "asset_id": "TX-233",
+        "estimated_customers_affected": 5377,
+        "critical_facilities_affected": 1,
+        "affected_zones_count": 2,
+        "stressed_assets_count": 3,
+        "cascade_depth": 2,
+        "severity_score": 66.97,
+        "severity": "HIGH"
+      },
+      {
+        "asset_id": "CAP-109",
+        "estimated_customers_affected": 2705,
+        "critical_facilities_affected": 4,
+        "affected_zones_count": 0,
+        "stressed_assets_count": 0,
+        "cascade_depth": 0,
+        "severity_score": 65.18,
+        "severity": "HIGH"
+      },
+      {
+        "asset_id": "TX-104",
+        "estimated_customers_affected": 3060,
+        "critical_facilities_affected": 1,
+        "affected_zones_count": 1,
+        "stressed_assets_count": 3,
+        "cascade_depth": 2,
+        "severity_score": 58.62,
+        "severity": "HIGH"
+      },
+      {
+        "asset_id": "CAP-126",
+        "estimated_customers_affected": 160,
+        "critical_facilities_affected": 0,
+        "affected_zones_count": 0,
+        "stressed_assets_count": 0,
+        "cascade_depth": 0,
+        "severity_score": 22.62,
+        "severity": "LOW"
+      }
+    ],
+    "worst": {
+      "asset_id": "TX-233",
+      "estimated_customers_affected": 5377,
+      "critical_facilities_affected": 1,
+      "affected_zones_count": 2,
+      "stressed_assets_count": 3,
+      "cascade_depth": 2,
+      "severity_score": 66.97,
+      "severity": "HIGH"
+    }
+  }
+}
