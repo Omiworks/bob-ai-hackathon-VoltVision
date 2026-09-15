@@ -1,4 +1,4 @@
-# 🚀 [Your Project Title Here]
+# 🚀 GridGuardian AI
 
 > ⚠️ **Replace everything in `[ ]` brackets with your actual content before submission.**
 
@@ -8,10 +8,10 @@
 
 | Field | Value |
 |---|---|
-| **Team Name** | [Your Team Name] |
-| **Track** | [AI / DevOps / Sustainability / Open] |
-| **Team Lead** | [Name] — [email@ibm.com] |
-| **Members** | [Name 1], [Name 2], [Name 3] |
+| **Team Name** | VoltVision |
+| **Track** | AI |
+| **Team Lead** | Aum Vaja — 26dce115@charusat.edu.in |
+| **Members** | Vrunda Kotadiya, Tarang Prajapati, Riza Bhatt |
 
 ---
 
@@ -19,7 +19,9 @@
 
 > In 2–3 sentences: What problem does your project solve? Who experiences this problem?
 
-[Describe the real-world problem your project addresses. Be specific about who the user is and what pain point they face.]
+Electricity utilities manage thousands of critical assets such as transformers, feeders, breakers, and capacitors, making it difficult to identify which assets require attention before they fail. More importantly, a high probability of failure does not necessarily mean that an asset has the highest operational consequence, so maintenance decisions based only on failure prediction can be misleading.
+
+Grid operators need a way to understand not only **what might fail**, but also **what could happen if it fails and what should be handled first**.
 
 ---
 
@@ -27,29 +29,46 @@
 
 > In 2–3 sentences: What did you build? How does it solve the problem above?
 
-[Describe your solution clearly. Explain the core mechanism — what makes it work.]
+**GridGuardian AI** is a decision-support system for electricity utilities that combines machine learning, grid-impact analysis, failure simulation, maintenance prioritization, and generative AI explanations.
+
+The system predicts asset failure risk from condition and maintenance data, independently estimates the potential grid impact, simulates what-if failure scenarios, calculates maintenance priority, and converts the structured results into an operational brief that helps users make informed decisions.
+
+Our core idea is:
+
+> **Don't just predict what might fail — help decide what to do about it.**
 
 ---
 
 ## ✨ Key Features
 
-- **Feature 1:** [Brief description — e.g., "Real-time anomaly detection using watsonx.ai"]
-- **Feature 2:** [Brief description]
-- **Feature 3:** [Brief description]
-- **Feature 4:** [Optional]
-- **Feature 5:** [Optional]
+**Predictive Failure Risk:** Uses a Gradient Boosting machine-learning model to estimate the probability that a grid asset may fail within the prediction horizon.
 
+- **Grid Impact Analysis:** Independently estimates the operational consequence of an asset failure using customers affected, critical facilities, network position, and asset criticality.
+
+- **What-If Failure Simulation:** Simulates a hypothetical asset failure across the network to estimate affected zones, customers, critical facilities, network depth, and stressed assets.
+
+- **Maintenance Priority Engine:** Combines failure risk, grid impact, criticality, and urgency to rank assets and identify which assets should receive attention first.
+
+- **AI Operations Brief:** Uses generative AI to turn structured predictions, impact results, and simulation outcomes into concise operational explanations without allowing the AI to calculate or invent the underlying metrics.
+
+- **Operations Dashboard:** Provides a centralized interface for monitoring asset health, risk, impact, priority, alerts, simulations, and model information.
 ---
 
 ## 🛠️ Tech Stack
 
 | Category | Technologies |
 |---|---|
-| **Languages** | [e.g., Python, TypeScript] |
-| **Frameworks** | [e.g., FastAPI, React] |
-| **IBM Technologies** | [e.g., watsonx.ai, IBM Bob, IBM Cloud] |
-| **Databases** | [e.g., PostgreSQL, Redis] |
-| **Other** | [e.g., Docker, GitHub Actions] |
+| **Languages** | Python, JavaScript |
+| **Frontend** | React, Vite, Tailwind CSS |
+| **Backend** | FastAPI |
+| **Machine Learning** | scikit-learn, Gradient Boosting |
+| **Network Simulation** | NetworkX |
+| **AI / Generative AI** | Generative AI operations-brief layer |
+| **IBM Technologies** | IBM BoB AI Innovation Hackathon platform |
+| **Data** | CSV, JSON, deterministic synthetic utility dataset |
+| **Testing** | pytest |
+| **Other** | GitHub Actions, REST API |
+
 
 ---
 
