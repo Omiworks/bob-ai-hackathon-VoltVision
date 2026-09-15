@@ -131,12 +131,12 @@ npm run dev
 
 ## 🖥️ Demo
 
-| Artifact | Link |
+| Artifact | Location |
 |---|---|
-| 📹 Demo Video | [See demo/demo-video-link.txt](demo/demo-video-link.txt) |
-| 🌐 Live Demo | [See demo/live-demo-url.txt](demo/live-demo-url.txt) |
-| 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
-| 📊 Presentation | [See presentation/slides.pdf](presentation/) |
+| 🖼️ Screenshots | [See screenshots/](screenshots/) |
+| 📊 Presentation | [See presentation/](presentation/) |
+| 📚 Documentation | [See docs/](docs/) |
+| 🔌 API Documentation | `http://127.0.0.1:8000/docs` when running locally |
 
 ---
 
