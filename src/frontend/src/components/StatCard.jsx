@@ -2,8 +2,11 @@
 // used in the header "GRID STATUS" strip. Not a decorative card.
 export default function StatCard({ label, value, sub, accent, tip }) {
   return (
-    <div className="border border-app-border bg-app-panel px-4 py-3" title={tip}>
-      <p className="text-[10px] font-semibold uppercase tracking-wider text-app-label">
+    <div
+      className="rounded-xl2 border border-app-border/70 bg-app-panel px-4 py-3 shadow-neu"
+      title={tip}
+    >
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-app-label etched">
         {label}
       </p>
       <p className={`mt-1 text-2xl font-semibold tabular text-app-text ${accent || ""}`}>

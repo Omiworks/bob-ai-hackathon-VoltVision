@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import StatusBadge from "../components/StatusBadge";
@@ -18,15 +18,31 @@ const SORTS = [
   { value: "impact", label: "Grid impact" },
 ];
 
+const VALID_CATEGORIES = new Set(CATEGORIES);
+
 export default function AssetsPage() {
+  // Deep-link support: /assets?risk=CRITICAL or /assets?priority=CRITICAL opens
+  // the registry with that filter pre-applied (used by dashboard stat cells).
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlRisk = VALID_CATEGORIES.has(searchParams.get("risk")) ? searchParams.get("risk") : "";
+  const urlPriority = VALID_CATEGORIES.has(searchParams.get("priority")) ? searchParams.get("priority") : "";
+
   const [query, setQuery] = useState("");
   const [search, setSearch] = useState("");
-  const [riskCategory, setRiskCategory] = useState("");
-  const [priorityCategory, setPriorityCategory] = useState("");
+  const [riskCategory, setRiskCategory] = useState(urlRisk);
+  const [priorityCategory, setPriorityCategory] = useState(urlPriority);
   const [criticality, setCriticality] = useState("");
   const [assetType, setAssetType] = useState("");
   const [sort, setSort] = useState("priority");
   const [page, setPage] = useState(0);
+
+  // React to external navigation to the same route with different params
+  // (e.g. clicking the dashboard's critical-stat cell while already on /assets).
+  useEffect(() => {
+    setRiskCategory(urlRisk);
+    setPriorityCategory(urlPriority);
+    setPage(0);
+  }, [urlRisk, urlPriority]);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -103,6 +119,7 @@ export default function AssetsPage() {
             onClick={() => {
               setQuery(""); setSearch(""); setRiskCategory(""); setPriorityCategory("");
               setCriticality(""); setAssetType(""); setPage(0);
+              setSearchParams({}, { replace: true });
             }}
             className="text-xs font-medium text-app-label hover:text-app-text"
           >

@@ -7,6 +7,22 @@
     <title>GridGuardian — Grid Operations</title>
   </head>
   <body class="bg-app-bg text-app-text">
+    <script>
+      // Apply saved theme before first paint to avoid a mode flash.
+      // No saved choice (or "light") → classic warm-cream look.
+      // "dark" → dark; "system" follows the OS preference.
+      (function () {
+        try {
+          var m = localStorage.getItem("gg.theme.mode");
+          if (m === "system") {
+            m = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          } else if (m !== "dark") {
+            m = "light";
+          }
+          if (m === "dark") document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

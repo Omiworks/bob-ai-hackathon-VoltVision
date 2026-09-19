@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { getHealth } from "../../services/api";
 import { cx } from "../../lib/format";
+import ThemeSettings from "../ThemeSettings";
 
 const NAV = [
   { to: "/", label: "Overview", icon: LayoutDashboard, end: true },
@@ -68,17 +69,17 @@ export default function AppLayout() {
 
   const navItemClass = (isActive) =>
     cx(
-      "flex items-center gap-3 rounded-[11px] border px-4 py-2.5 text-[12px] font-semibold uppercase tracking-wide transition-colors duration-150",
+      "flex items-center gap-3 rounded-[11px] border px-4 py-2.5 text-[12px] font-semibold uppercase tracking-wide transition-all duration-150",
       isActive
-        ? "border-app-accent/60 bg-app-accent/15 text-app-text hover:bg-app-accent/25"
-        : "border-transparent font-medium text-app-muted hover:border-white/75 hover:bg-app-hover hover:text-app-text"
+        ? "border-app-accent/40 bg-app-accent/10 text-app-accentDim shadow-neu-inset"
+        : "border-transparent font-medium text-app-muted hover:border-app-border/70 hover:bg-app-hover hover:text-app-text hover:shadow-neu-sm"
     );
 
   const sidebar = (
     <nav className="flex h-full flex-col px-2 py-3">
       <div className="flex items-center gap-3 px-3 pb-4 pt-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-app-accent">
-          <Zap className="h-4 w-4 text-white" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-app-accent shadow-neu-accent">
+          <Zap className="h-4 w-4 text-white" strokeWidth={2.5} />
         </div>
         <div>
           <p className="text-sm font-bold tracking-tight text-app-text">GRIDGUARDIAN</p>
@@ -112,10 +113,13 @@ export default function AppLayout() {
         ))}
       </div>
 
-      <div className="border-t border-app-border px-3 py-3">
-        <p className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-app-muted">
+      <div className="border-t border-app-borderDim px-3 py-3">
+        <p className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-app-muted etched">
           <span
-            className={cx("h-1.5 w-1.5 rounded-full", health ? "bg-low" : "bg-medium")}
+            className={cx(
+              "h-1.5 w-1.5 rounded-full",
+              health ? "bg-low shadow-[0_0_4px_var(--gg-low)]" : "bg-medium"
+            )}
           />
           System online
         </p>
@@ -127,15 +131,15 @@ export default function AppLayout() {
   );
 
   return (
-    <div className="min-h-screen bg-app-bg text-app-text">
-      <aside className="fixed left-3 top-3 z-40 hidden h-[calc(100%-1.5rem)] w-[240px] rounded-xl border border-app-border bg-app-sidebar lg:block">
+    <div className="paper min-h-screen bg-app-bg text-app-text">
+      <aside className="fixed left-3 top-3 z-40 hidden h-[calc(100%-1.5rem)] w-[240px] rounded-xl2 border border-app-border/70 bg-app-sidebar shadow-neu-lg lg:block">
         {sidebar}
       </aside>
 
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
-          <aside className="absolute inset-y-0 left-0 w-[240px] border-r border-app-border">{sidebar}</aside>
+          <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
+          <aside className="absolute inset-y-0 left-0 w-[240px] border-r border-app-border bg-app-sidebar shadow-neu-lg">{sidebar}</aside>
           <button
             onClick={() => setMobileOpen(false)}
             className="absolute right-3 top-3 rounded p-1 text-app-muted hover:text-app-text"
@@ -147,11 +151,11 @@ export default function AppLayout() {
       )}
 
       <div className="lg:pl-[264px]">
-        <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-app-border bg-app-header px-5 py-1.5">
+        <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-app-borderDim bg-app-header/95 px-5 py-1.5 shadow-[0_1px_0_var(--gg-sh-light),0_2px_6px_var(--gg-sh-outer)] backdrop-blur-sm">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileOpen(true)}
-              className="rounded p-1 text-app-muted hover:bg-app-hover lg:hidden"
+              className="rounded-md border border-app-border/60 bg-app-input p-1.5 text-app-muted shadow-neu-sm transition-all duration-150 hover:text-app-text hover:shadow-neu active:shadow-neu-press lg:hidden"
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />
@@ -167,13 +171,17 @@ export default function AppLayout() {
           </div>
 
           <div className="flex items-center gap-3 text-[11px]">
+            <ThemeSettings />
             <span className="hidden text-app-label xl:inline">
               Last updated: <span className="mono tabular text-app-muted">{updated}</span>
             </span>
             <span className="hidden text-app-label sm:inline">Synthetic data</span>
-            <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-wider text-app-muted">
+            <span className="inline-flex items-center gap-1.5 font-semibold uppercase tracking-wider text-app-muted etched">
               <span
-                className={cx("h-1.5 w-1.5 rounded-full", health ? "bg-low" : "bg-medium")}
+                className={cx(
+                  "h-1.5 w-1.5 rounded-full",
+                  health ? "bg-low shadow-[0_0_4px_var(--gg-low)]" : "bg-medium"
+                )}
               />
               System online
             </span>

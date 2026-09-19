@@ -2,10 +2,106 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Root surfaces are dark and inherently full-height so there is never a
-   white or light strip around the application. */
+/* ============================================================
+   GridGuardian design system — CSS variables for every app color.
+
+   LIGHT MODE  = warm cream physical workspace:
+     warm ivory bg → cream nav → soft beige cards →
+     lighter sand elevated surfaces → taupe controls.
+
+   DARK MODE   = sophisticated warm charcoal physical workspace:
+     deep warm charcoal bg → graphite nav → dark brown-grey cards →
+     lighter elevated surfaces → muted taupe controls.
+
+   Every level is a DIFFERENT tone so background, navigation, cards,
+   elevated cards, controls and inputs are clearly distinguishable
+   while sharing one cohesive warm palette. The accent set is applied
+   at runtime from src/lib/theme.js (default: dusty slate blue).
+   ============================================================ */
+
+:root {
+  /* Surface hierarchy (level 0 → 4) */
+  --gg-bg: #EFE8DB;         /* L0 — app background, warm ivory */
+  --gg-sidebar: #F2ECDF;    /* L1 — navigation, cream */
+  --gg-header: #F5EFE3;     /* L1 — top bar, cream */
+  --gg-main: #EFE8DB;       /* L0 — content area */
+  --gg-panel: #F8F3E9;      /* L2 — cards, soft beige */
+  --gg-raised: #EAE1D0;     /* L3 — elevated/chips, sand */
+  --gg-table: #F6F1E7;      /* L2 — table surface */
+  --gg-hover: #E7DDCB;      /* L3 — hover/active rows, darker sand */
+  --gg-input: #F3EDDF;      /* L4 — inputs/controls, distinct tone */
+
+  /* Borders — muted brown-grey, clearly visible on every surface */
+  --gg-border: #D8CCB8;
+  --gg-borderDim: #E3D9C6;
+
+  /* Text — charcoal primary, warm grey secondary */
+  --gg-text: #362F25;
+  --gg-muted: #6F6454;
+  --gg-label: #94886F;
+
+  /* Accent (default dusty slate blue; runtime-settable) */
+  --gg-accent: #5B7E9E;
+  --gg-accentDim: #4A6A87;
+  --gg-accentBg: rgba(91, 126, 158, 0.12);
+  --gg-accentRing: rgba(91, 126, 158, 0.4);
+
+  /* Status colors */
+  --gg-critical: #B0524A;
+  --gg-high: #B97F35;
+  --gg-medium: #A08A32;
+  --gg-low: #5A8F6D;
+
+  /* Neumorphic shadow tones (light top-left, warm shade bottom-right) */
+  --gg-sh-light: rgba(255, 255, 255, 0.95);
+  --gg-sh-outer: rgba(163, 148, 124, 0.42);
+  --gg-sh-outer-lg: rgba(163, 148, 124, 0.4);
+  --gg-sh-inset-dark: rgba(203, 190, 168, 0.55);
+}
+
+html.dark {
+  /* Surface hierarchy — each level a distinct warm charcoal step */
+  --gg-bg: #171512;         /* L0 — deep warm charcoal */
+  --gg-sidebar: #1E1B17;    /* L1 — navigation, lighter warm charcoal */
+  --gg-header: #201D19;     /* L1 — top bar */
+  --gg-main: #171512;       /* L0 — content area */
+  --gg-panel: #26221D;      /* L2 — cards, dark brown-grey graphite */
+  --gg-raised: #2F2A24;     /* L3 — elevated cards, noticeably lighter */
+  --gg-table: #221F1A;      /* L2 — table surface */
+  --gg-hover: #38322A;      /* L3 — hover/active rows */
+  --gg-input: #2A2620;      /* L4 — inputs/controls, distinct taupe tone */
+
+  /* Borders — subtle warm-grey, visible against every surface */
+  --gg-border: #453E33;
+  --gg-borderDim: #332E27;
+
+  /* Text — soft ivory primary, muted warm grey secondary */
+  --gg-text: #EDE7DA;
+  --gg-muted: #B0A794;
+  --gg-label: #857C69;
+
+  /* Status colors — brightened for dark surfaces */
+  --gg-critical: #D97A70;
+  --gg-high: #DBA25A;
+  --gg-medium: #C7B15E;
+  --gg-low: #7FB892;
+
+  /* Dark neumorphism — soft black shade, faint warm highlight */
+  --gg-sh-light: rgba(255, 244, 224, 0.05);
+  --gg-sh-outer: rgba(0, 0, 0, 0.55);
+  --gg-sh-outer-lg: rgba(0, 0, 0, 0.5);
+  --gg-sh-inset-dark: rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
 html {
-  background-color: #0B1117;
+  background-color: var(--gg-bg);
+  color-scheme: light;
+}
+html.dark {
   color-scheme: dark;
 }
 
@@ -15,17 +111,39 @@ body {
   font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-color: #0B1117;
-  color: #E6EDF3;
+  background-color: var(--gg-bg);
+  color: var(--gg-text);
 }
 
 #root {
   min-height: 100vh;
-  background-color: #0B1117;
+  background-color: var(--gg-bg);
+}
+
+/* Theme transition — surfaces, borders, text, shadows all glide when
+   switching Light ↔ Dark. Kept short so it feels snappy, not sluggish. */
+body,
+#root,
+.paper {
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    fill 220ms ease,
+    stroke 220ms ease,
+    box-shadow 220ms ease !important;
+  transition-delay: 0ms !important;
 }
 
 ::selection {
-  background-color: rgba(77, 140, 203, 0.35);
+  background-color: var(--gg-accentBg);
 }
 
 /* Numeric values, asset IDs and timestamps render tabular by default. */
@@ -38,38 +156,66 @@ body {
   font-family: "Cascadia Mono", "Consolas", ui-monospace, monospace;
 }
 
+/* Letterpress-style engraved text used for micro labels — tuned per mode. */
+.etched {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+html.dark .etched {
+  text-shadow: 0 1px 0 rgba(255, 244, 224, 0.05);
+}
+
+/* Subtle paper grain on the app background — skeuomorphic, but quiet. */
+.paper {
+  background-image: radial-gradient(rgba(163, 148, 124, 0.07) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+html.dark .paper {
+  background-image: radial-gradient(rgba(255, 244, 224, 0.03) 1px, transparent 1px);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B1117;
+  background: var(--gg-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2E3D49;
+  background: var(--gg-border);
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3A4A58;
+  background: var(--gg-muted);
 }
 
-/* Thin, quiet focus ring that still works on dark panels. */
+/* Thin, quiet focus ring tuned for the active accent — obvious but calm. */
 :focus-visible {
-  outline: 2px solid #54708f;
+  outline: 2px solid var(--gg-accent);
   outline-offset: 1px;
 }
 
-/* Dark select/option popups so open dropdowns match the theme. */
+/* Dropdown popups match the active theme. */
 select option {
-  background-color: #151E26;
-  color: #E6EDF3;
+  background-color: var(--gg-panel);
+  color: var(--gg-text);
 }
 
-/* Recharts labels/tooltips stay legible on dark panels. */
+/* Recharts labels/tooltips stay legible in both modes. */
 .recharts-cartesian-axis-tick-value {
-  fill: #657482;
+  fill: var(--gg-label);
 }
 .recharts-cartesian-axis-line,
 .recharts-cartesian-axis-tick-line {
-  stroke: #27333D;
+  stroke: var(--gg-border);
+}
+
+/* Neumorphic inset surfaces in dark mode need a darker inner edge so the
+   embossing reads correctly against charcoal. */
+html.dark .shadow-neu-inset {
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+    inset -2px -2px 5px rgba(255, 244, 224, 0.05);
+}
+html.dark .shadow-neu-press {
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5),
+    inset -2px -2px 4px rgba(255, 244, 224, 0.05);
 }

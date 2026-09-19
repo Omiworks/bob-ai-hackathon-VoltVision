@@ -1,46 +1,47 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
+  // Class-based dark mode: toggling `dark` on <html> switches every
+  // app-* color, since each maps to a CSS variable that html.dark overrides.
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        // Restrained industrial palette — deep charcoal/slate surfaces,
-        // subtle blue-gray accents. No neon. No gradients.
         app: {
-          // body background
-          bg: "#0B1117",
-          // sidebar — dark, slightly deeper than the body
-          sidebar: "#0A1016",
-          // sticky top bar
-          header: "#0D141B",
-          // main content surface
-          main: "#101820",
-          // cards / panels
-          panel: "#151E26",
-          // raised stripes / chips / table header
-          raised: "#18232C",
-          // table body / rows
-          table: "#111920",
-          // hover surfaces
-          hover: "#19242D",
-          // subtle gray-blue borders
-          border: "#27333D",
-          borderDim: "#1D2833",
-          // primary text: soft white
-          text: "#E6EDF3",
-          // secondary text
-          muted: "#8B98A5",
-          // labels / tertiary text
-          label: "#657482",
-          // restrained industrial blue accent
-          accent: "#4D8CCB",
-          accentDim: "#3C71A8",
+          // Every token points at a CSS variable so the entire palette can be
+          // swapped at runtime (light/dark) without touching component code.
+          bg: "var(--gg-bg)",
+          sidebar: "var(--gg-sidebar)",
+          header: "var(--gg-header)",
+          main: "var(--gg-main)",
+          panel: "var(--gg-panel)",
+          raised: "var(--gg-raised)",
+          table: "var(--gg-table)",
+          hover: "var(--gg-hover)",
+          input: "var(--gg-input)",
+          border: "var(--gg-border)",
+          borderDim: "var(--gg-borderDim)",
+          text: "var(--gg-text)",
+          muted: "var(--gg-muted)",
+          label: "var(--gg-label)",
+          accent: "var(--gg-accent)",
+          accentDim: "var(--gg-accentDim)",
+          accentBg: "var(--gg-accentBg)",
+          accentRing: "var(--gg-accentRing)",
         },
-        // Muted status colors (not neon).
-        critical: "#c8574f",
-        high: "#cf8f3f",
-        medium: "#c0a33d",
-        low: "#4f9e6b",
+        critical: "var(--gg-critical)",
+        high: "var(--gg-high)",
+        medium: "var(--gg-medium)",
+        low: "var(--gg-low)",
+      },
+      boxShadow: {
+        neu: "3px 3px 7px var(--gg-sh-outer), -3px -3px 7px var(--gg-sh-light)",
+        "neu-sm": "2px 2px 4px var(--gg-sh-outer), -2px -2px 4px var(--gg-sh-light)",
+        "neu-lg": "6px 6px 14px var(--gg-sh-outer-lg), -6px -6px 14px var(--gg-sh-light)",
+        "neu-inset": "inset 2px 2px 5px var(--gg-sh-outer), inset -2px -2px 5px var(--gg-sh-light)",
+        "neu-accent": "3px 3px 7px var(--gg-sh-outer), -3px -3px 7px var(--gg-sh-light)",
+        "neu-accent-inset": "inset 2px 2px 5px var(--gg-sh-outer), inset -2px -2px 5px var(--gg-sh-light)",
+        "neu-press": "inset 2px 2px 4px var(--gg-sh-outer), inset -2px -2px 4px var(--gg-sh-light)",
       },
     },
   },

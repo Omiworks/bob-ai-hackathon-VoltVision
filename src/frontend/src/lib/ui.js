@@ -1,16 +1,18 @@
-// GridGuardian — shared UI class tokens for a restrained industrial
-// operations console. Dark charcoal/slate surfaces, hairline gray-blue
-// borders, flat panels, compact density. No glow, no gradients.
+// GridGuardian — shared UI class tokens for a restrained bright-cream
+// operations console. Warm paper surfaces, soft neumorphic embossing, hairline
+// taupe borders, compact density. Skeuomorphic, but quiet — no glow, no neon.
 
-export const PANEL = "rounded border border-app-border bg-app-panel";
+export const PANEL =
+  "rounded-xl2 border border-app-border/70 bg-app-panel shadow-neu";
 
-export const PANEL_PADDED = "rounded border border-app-border bg-app-panel p-4";
+export const PANEL_PADDED =
+  "rounded-xl2 border border-app-border/70 bg-app-panel p-4 shadow-neu";
 
 export const PANEL_HEAD =
-  "flex items-center justify-between gap-3 border-b border-app-border px-4 py-2.5";
+  "flex items-center justify-between gap-3 border-b border-app-borderDim px-4 py-2.5";
 
 export const SECTION_TITLE =
-  "text-[11px] font-semibold uppercase tracking-wider text-app-label";
+  "text-[11px] font-semibold uppercase tracking-wider text-app-label etched";
 
 export const MUTED = "text-xs text-app-muted";
 
@@ -25,21 +27,26 @@ export const TR =
 export const TABLE_WRAP = "overflow-x-auto";
 
 export const INPUT =
-  "rounded border border-app-border bg-app-bg px-2.5 py-1.5 text-sm text-app-text placeholder-app-label outline-none focus:border-app-accent focus:ring-1 focus:ring-app-accent/40";
+  "rounded-lg border border-app-border/80 bg-app-input px-2.5 py-1.5 text-sm text-app-text placeholder-app-label shadow-neu-inset outline-none transition-shadow focus:border-app-accent focus:ring-1 focus:ring-app-accent/40";
 
 export const SELECT = `${INPUT} pr-7`;
 
+// Buttons: visibly distinct states in BOTH themes —
+//   default  → subtle raised control surface (L4 input tone)
+//   hover    → elevation + restrained accent hint
+//   pressed  → inset effect
+//   disabled → reduced contrast
 export const BTN =
-  "inline-flex items-center justify-center gap-1.5 rounded border px-3 py-1.5 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40";
+  "inline-flex items-center justify-center gap-1.5 rounded-lg border border-app-border/70 bg-app-input px-3 py-1.5 text-sm font-medium text-app-text shadow-neu-sm transition-all duration-150 hover:border-app-accent/50 hover:shadow-neu active:shadow-neu-press disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none";
 
-export const BTN_PRIMARY = `${BTN} border-app-accent bg-app-accent text-white hover:bg-app-accentDim`;
+export const BTN_PRIMARY = `${BTN} border-app-accent/60 bg-app-accent text-white shadow-neu-accent hover:border-app-accent hover:bg-app-accentDim active:shadow-neu-accent-inset`;
 
-export const BTN_SECONDARY = `${BTN} border-app-border bg-app-raised text-app-text hover:bg-app-hover`;
+export const BTN_SECONDARY = `${BTN} bg-app-panel hover:bg-app-hover`;
 
-export const BTN_DANGER = `${BTN} border-critical/40 bg-transparent text-critical hover:bg-critical/10`;
+export const BTN_DANGER = `${BTN} bg-app-panel text-critical hover:bg-critical/10`;
 
 export const LINK =
-  "font-medium text-app-text underline-offset-2 hover:text-white hover:underline";
+  "font-medium text-app-accent underline-offset-2 hover:text-app-accentDim hover:underline";
 
 export const MONO = "mono tabular";
 

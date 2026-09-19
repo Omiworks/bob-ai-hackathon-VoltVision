@@ -25,15 +25,15 @@ export default function AlertsPage() {
         title="Alerts"
         subtitle="Asset-level advisories derived from the same scored signals driving the risk rankings."
         right={
-          <div className="flex items-center gap-0.5 rounded border border-app-border bg-app-raised p-0.5">
+          <div className="flex items-center gap-0.5 rounded-lg border border-app-border/70 bg-app-input p-0.5 shadow-neu-inset">
             {FILTERS.map((f) => (
               <button
                 key={f.value}
                 onClick={() => setSeverity(f.value)}
-                className={`rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                className={`rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
                   severity === f.value
-                    ? "bg-app-accent text-white"
-                    : "text-app-muted hover:bg-app-hover hover:text-app-text"
+                    ? "bg-app-panel text-app-accentDim shadow-neu-sm"
+                    : "text-app-muted hover:text-app-text"
                 }`}
               >
                 {f.label}

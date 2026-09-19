@@ -2,28 +2,74 @@
 // diagram: SUBSTATION -> failed ASSET -> affected ZONES -> affected FACILITIES
 // -> Customers / stressed neighbor assets. Pure presentation of data already
 // returned by the backend; the substation label comes from the asset record.
-// Dark-theme rendering with thin lines and restrained status colors.
+// Theme-aware: all colors resolve from CSS variables via useThemeColors so
+// the diagram follows light/dark mode and the active accent.
 
-const C = {
-  panel: "#10151c",
-  raised: "#151b23",
-  border: "#242e3a",
-  line: "#3a4654",
-  faint: "#2a3542",
-  accent: "#4f84c3",
-  accentText: "#7aa7d6",
-  accentDim: "#3a688f",
-  critical: "#c8574f",
-  criticalDim: "#e0756b",
-  criticalLine: "#c8574f",
-  amber: "#cf8f3f",
-  amberText: "#e0a45c",
-  body: "#c2cbd6",
-  label: "#8a95a4",
-  zoneFill: "#151b23",
+import { useThemeColors, useThemeMode } from "../../hooks/useTheme";
+import { STATUS_TINTS } from "../../lib/theme";
+
+// Default fallbacks only used before first CSS resolution.
+const FALLBACK = {
+  panel: "#FBF7EF",
+  raised: "#F1EADC",
+  border: "#D9CEBC",
+  line: "#B4A78F",
+  faint: "#D5C9B6",
+  accent: "#5B7E9E",
+  accentText: "#44658A",
+  accentDim: "#4A6A87",
+  critical: "#B0524A",
+  amber: "#B97F35",
+  amberText: "#8F6220",
+  body: "#3B342A",
+  label: "#9A8E7B",
 };
 
-function Box({ x, y, w, h, rx = 3, fill, stroke, text, sub, textFill = C.body, subFill = C.label }) {
+function useDiagramColors() {
+  const mode = useThemeMode();
+  const [
+    panel, raised, border, faint, accent, accentDim, text, muted, label, critical, high,
+  ] = useThemeColors(
+    "--gg-panel", "--gg-raised", "--gg-border", "--gg-borderDim", "--gg-accent",
+    "--gg-accentDim", "--gg-text", "--gg-muted", "--gg-label", "--gg-critical", "--gg-high"
+  );
+  const tints = STATUS_TINTS[mode] || STATUS_TINTS.light;
+  const accentRGB = hexToRgbTriple(accent || FALLBACK.accent);
+  const highRGB = hexToRgbTriple(high || FALLBACK.amber);
+  return {
+    mode,
+    panel: panel || FALLBACK.panel,
+    raised: raised || FALLBACK.raised,
+    border: border || FALLBACK.border,
+    line: label || FALLBACK.label,
+    faint: faint || FALLBACK.faint,
+    accent: accent || FALLBACK.accent,
+    accentText: accentDim || FALLBACK.accentText,
+    accentDim: accentDim || FALLBACK.accentDim,
+    accentTint: `rgba(${accentRGB},0.10)`,
+    critical: critical || FALLBACK.critical,
+    criticalDim: critical || FALLBACK.critical,
+    criticalLine: critical || FALLBACK.critical,
+    amber: high || FALLBACK.amber,
+    amberText: high || FALLBACK.amber,
+    body: text || FALLBACK.body,
+    label: muted || FALLBACK.label,
+    zoneFill: raised || FALLBACK.raised,
+    criticalTint: tints.critical,
+    highTint: tints.high,
+    highTintSoft: `rgba(${highRGB},0.08)`,
+    highStroke: `rgba(${highRGB},0.55)`,
+  };
+}
+
+function hexToRgbTriple(hex) {
+  const h = String(hex || "").replace("#", "");
+  if (h.length !== 6) return "91,126,158";
+  const n = parseInt(h, 16);
+  return `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`;
+}
+
+function Box({ x, y, w, h, rx = 3, fill, stroke, text, sub, textFill, subFill }) {
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} rx={rx} fill={fill} stroke={stroke} strokeWidth={1.2} />
@@ -47,10 +93,11 @@ function Box({ x, y, w, h, rx = 3, fill, stroke, text, sub, textFill = C.body, s
 }
 
 function Arrow({ x, y }) {
-  return <polygon points={`${x - 7},${y - 5} ${x - 7},${y + 5} ${x},${y}`} fill={C.line} />;
+  return <polygon points={`${x - 7},${y - 5} ${x - 7},${y + 5} ${x},${y}`} fill="var(--gg-label)" />;
 }
 
 export default function SimulationDiagram({ sim, substation }) {
+  const C = useDiagramColors();
   if (!sim) return null;
 
   const severityHigh = ["HIGH", "CRITICAL"].includes(sim.severity);
@@ -113,7 +160,7 @@ export default function SimulationDiagram({ sim, substation }) {
           y={substY}
           w={boxW.subst}
           h={h.subst}
-          fill="#0f1c2a"
+          fill={C.accentTint}
           stroke={C.accent}
           text={substation || "SUBSTATION"}
           sub="SUBSTATION"
@@ -126,12 +173,12 @@ export default function SimulationDiagram({ sim, substation }) {
           y={assetY}
           w={boxW.asset}
           h={h.asset}
-          fill={severityHigh ? "rgba(200,87,79,0.12)" : "rgba(207,143,63,0.10)"}
+          fill={severityHigh ? C.criticalTint : C.highTint}
           stroke={assetColor}
           text={sim.failed_asset}
           sub={`${sim.asset_type || "asset"} · FAILS`}
           textFill={assetText}
-          subFill={severityHigh ? "rgba(224,117,107,0.85)" : "rgba(224,164,92,0.85)"}
+          subFill={assetText}
         />
 
         {zones.map((z, i) => (
@@ -161,7 +208,7 @@ export default function SimulationDiagram({ sim, substation }) {
               y={facYs[i] - h.facilities / 2}
               w={boxW.facilities}
               h={h.facilities}
-              fill={critical ? "rgba(200,87,79,0.12)" : C.zoneFill}
+              fill={critical ? C.criticalTint : C.zoneFill}
               stroke={critical ? C.criticalLine : C.line}
               text={`${f.name}${critical ? " ★" : ""}`}
               textFill={critical ? C.criticalDim : C.body}
@@ -179,7 +226,7 @@ export default function SimulationDiagram({ sim, substation }) {
           y={chipY}
           w={boxW.right}
           h={h.chip}
-          fill="#0f1c2a"
+          fill={C.accentTint}
           stroke={C.accent}
           text={`~${Number(sim.estimated_customers_affected || 0).toLocaleString()} customers`}
           sub="CUSTOMER IMPACT"
@@ -194,12 +241,12 @@ export default function SimulationDiagram({ sim, substation }) {
             y={strYs[i]}
             w={boxW.right}
             h={h.stressed}
-            fill="rgba(207,143,63,0.08)"
-            stroke="rgba(207,143,63,0.55)"
+            fill={C.highTintSoft}
+            stroke={C.highStroke}
             text={s.asset_id}
             sub={`stress ${Number(s.stress_score).toFixed(0)}`}
             textFill={C.amberText}
-            subFill={C.amber}
+            subFill={C.amberText}
           />
         ))}
         {stressedMore > 0 && (
@@ -211,7 +258,7 @@ export default function SimulationDiagram({ sim, substation }) {
 
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-app-borderDim pt-2 text-[11px] text-app-muted">
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-sm border border-app-accent bg-app-accentSoft" />
+          <span className="inline-block h-2.5 w-2.5 rounded-sm border border-app-accent bg-app-accent/15" />
           Substation
         </span>
         <span className="flex items-center gap-1.5">
@@ -227,7 +274,7 @@ export default function SimulationDiagram({ sim, substation }) {
           Critical facility
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-sm border border-app-accent bg-app-accentSoft" />
+          <span className="inline-block h-2.5 w-2.5 rounded-sm border border-app-accent bg-app-accent/15" />
           Customer impact
         </span>
         <span className="flex items-center gap-1.5">

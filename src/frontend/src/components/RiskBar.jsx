@@ -8,9 +8,9 @@ export default function RiskBar({ value, category, showValue = true, thin = fals
   return (
     <div className="flex items-center gap-2">
       <div
-        className={`w-full min-w-[40px] overflow-hidden rounded-sm bg-app-raised ${thin ? "h-1" : "h-1.5"}`}
+        className={`w-full min-w-[40px] overflow-hidden rounded-full bg-app-raised shadow-neu-inset ${thin ? "h-1" : "h-1.5"}`}
       >
-        <div className={`h-full ${style.bar}`} style={{ width: `${v}%` }} />
+        <div className={`h-full rounded-full ${style.bar}`} style={{ width: `${v}%` }} />
       </div>
       {showValue && (
         <span className="w-10 text-right text-xs tabular text-app-text">

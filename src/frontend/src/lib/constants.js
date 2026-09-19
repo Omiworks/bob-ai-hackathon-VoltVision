@@ -4,38 +4,39 @@
 // precomputed category to an operator-friendly instruction. They are NOT
 // computed by any Phase 1-5 algorithm and must not be mistaken for a backend
 // value.
+//
+// Category colors are CSS variables (see index.css), so badges/bars/text
+// follow light/dark mode automatically. For SVG contexts that need resolved
+// values, use statusColor(category, mode) from lib/theme.js.
 
 export const CATEGORIES = ["CRITICAL", "HIGH", "MEDIUM", "LOW"];
 
-// Muted dark-theme category styling — subtle tinted rings, no glow.
+// Muted category styling — subtle tinted rings, no glow. All color classes
+// reference Tailwind tokens mapped to CSS variables.
 export const CATEGORY_STYLES = {
   CRITICAL: {
     badge: "bg-critical/10 text-critical ring-critical/40",
     bar: "bg-critical",
     text: "text-critical",
     dot: "bg-critical",
-    hex: "#c8574f",
   },
   HIGH: {
     badge: "bg-high/10 text-high ring-high/40",
     bar: "bg-high",
     text: "text-high",
     dot: "bg-high",
-    hex: "#cf8f3f",
   },
   MEDIUM: {
     badge: "bg-medium/10 text-medium ring-medium/40",
     bar: "bg-medium",
     text: "text-medium",
     dot: "bg-medium",
-    hex: "#c0a33d",
   },
   LOW: {
     badge: "bg-low/10 text-low ring-low/40",
     bar: "bg-low",
     text: "text-low",
     dot: "bg-low",
-    hex: "#4f9e6b",
   },
 };
 
@@ -45,8 +46,17 @@ export const INFO_STYLE = {
   bar: "bg-app-accent",
   text: "text-app-accent",
   dot: "bg-app-accent",
-  hex: "#4f84c3",
 };
+
+// Concrete hex for SVG contexts that cannot use var(); picks the mode-aware
+// value maintained in lib/theme.js (kept in sync with index.css).
+export function statusColor(category, mode) {
+  const key = String(category || "").toUpperCase();
+  const light = { CRITICAL: "#B0524A", HIGH: "#B97F35", MEDIUM: "#A08A32", LOW: "#5A8F6D" };
+  const dark = { CRITICAL: "#D97A70", HIGH: "#DBA25A", MEDIUM: "#C7B15E", LOW: "#7FB892" };
+  const set = mode === "dark" ? dark : light;
+  return set[key] || set.LOW;
+}
 
 // UI explanation of what each maintenance-priority category means in the
 // field. Pure presentation text — see the header comment.

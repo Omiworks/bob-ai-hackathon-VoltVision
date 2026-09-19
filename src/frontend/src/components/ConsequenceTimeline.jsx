@@ -54,8 +54,8 @@ export default function ConsequenceTimeline({ sim }) {
         <div key={s.label} className="flex items-center gap-3">
           <div className="flex flex-col items-center self-stretch">
             <span
-              className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-sm ring-2 ring-app-panel"
-              style={{ backgroundColor: toneColor(s.tone) }}
+              className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full ring-2 ring-app-panel"
+              style={{ backgroundColor: toneColor(s.tone), boxShadow: "0 1px 2px var(--gg-sh-outer)" }}
             />
             {i < steps.length - 1 && <span className="w-px flex-1 bg-app-border" />}
           </div>
@@ -82,11 +82,15 @@ export default function ConsequenceTimeline({ sim }) {
 }
 
 function toneColor(name) {
-  if (name === "bg-app-accent") return "#4f84c3";
-  if (name === "bg-app-accentDim") return "#3a688f";
-  if (name === "bg-app-label") return "#5c6b7a";
-  if (name === "bg-critical") return "#c8574f";
-  if (name === "bg-medium") return "#c0a33d";
+  // Map Tailwind class names back to the CSS variables so the timeline dots
+  // follow light/dark mode and the active accent.
+  if (name === "bg-app-accent") return "var(--gg-accent)";
+  if (name === "bg-app-accentDim") return "var(--gg-accentDim)";
+  if (name === "bg-app-label") return "var(--gg-label)";
+  if (name === "bg-critical") return "var(--gg-critical)";
+  if (name === "bg-high") return "var(--gg-high)";
+  if (name === "bg-medium") return "var(--gg-medium)";
+  if (name === "bg-low") return "var(--gg-low)";
   if (name?.startsWith("bg-")) return name.slice(3);
   return name;
 }
